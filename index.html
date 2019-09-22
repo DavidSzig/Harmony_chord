@@ -1,0 +1,2037 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>test</title>
+
+  
+      <link rel="stylesheet" href="./style.css">
+   
+ <style type="text/css">
+   
+@charset "UTF-8";
+body {
+  font-family: Arial, "Hiragino Sans GB", 冬青黑, "Microsoft YaHei", 微软雅黑, SimSun, 宋体, Helvetica, Tahoma, "Arial sans-serif";
+  background: #000;
+}
+
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+
+
+
+ </style>
+
+  
+</head>
+
+<body> 
+  <div class="date-selector">  
+    <div class="note1" id="note1" ondragleave="dragLeave(event)"
+    style="-moz-perspective: 600px; -moz-perspective-origin: 350%; flex: 0.3"></div>
+    <div class="chord1" id="chord1"  ondragleave="dragLeave(event)"
+    style="-moz-perspective: 1200px; -moz-perspective-origin: 200%"></div>
+   <div class="nest"> 
+     <div class="e01" id="e01" ondragleave="dragLeave(event)" >_______</div>
+      <div class="e02" id="e02" ondragleave="dragLeave(event)" >_______</div>
+       <div class="e03" id="e03" ondragleave="dragLeave(event)" >_______</div>
+         <div class="e04" id="e04" ondragleave="dragLeave(event)" >_______</div>
+          <div class="e05" id="e05" ondragleave="dragLeave(event)" >_______</div>
+           <div class="e06" id="e06" ondragleave="dragLeave(event)" >_______</div>
+            <div class="e07" id="e07" ondragleave="dragLeave(event)" >_______</div>
+             <div class="e08" id="e08" ondragleave="dragLeave(event)" >_______</div>
+              <div class="e09" id="e09" ondragleave="dragLeave(event)" >_______</div>
+               <div class="e10" id="e10" ondragleave="dragLeave(event)" >_______</div>
+                <div class="e11" id="e11" ondragleave="dragLeave(event)" >_______</div>
+                 <div class="e12" id="e12" ondragleave="dragLeave(event)" >_______</div> 
+     </div>
+    <div class="note2" id="note2" ondragleave="dragLeave(event)" 
+    style="-moz-perspective: 600px; -moz-perspective-origin: -50%; flex: 0.3"></div>
+    <div class="chord2" id="chord2" ondragleave="dragLeave(event)" 
+    style="-moz-perspective: 1200px; -moz-perspective-origin: -200%"></div> </div>
+
+<!-- FROM VARS -->
+
+<label class="switch">
+  <input type="checkbox" checked="checked" name="buta">
+  <span class="slider"></span>
+</label>
+
+<label class="switch">
+  <input type="checkbox" checked="checked" name="butb">
+  <span class="slider round"></span>
+</label>
+       <button onclick="location.reload(true);">Suggest chords</button>
+<hr style="height:35px; visibility:hidden;">
+       <p id="demo2"> <!-- onclick="console.log('groovy')"> -->
+        <h1 id="eventType"></h1>
+         </p>
+       <div id="placehere" name="pian" style="width: 0px; height: 0px"><img class="pia" alt="img0"></div>
+       <div id="placehere1" name="pian1" style="width: 0px; height: 0px"><img class="pia" alt="img1"></div> 
+       <div id="placehere2" name="chit" style="width: 0px; height: 0px"><img class="gui" alt="img2"></div>
+       <div id="placehere3" name="chit1" style="width: 0px; height: 0px"><img class="gui" alt="img3"></div>
+       <div id="placehere4" name="chit2" style="width: 0px; height: 0px"><img class="gui" alt="img4"></div>
+       <div id="placehere5" name="chit3" style="width: 0px; height: 0px"><img class="gui" alt="img5"></div>
+       <div id="placehere6" name="chit4" style="width: 0px; height: 0px"><img class="gui" alt="img6"></div>
+         <p id="demo3" style="color: white"></p>
+<!-- VARS END -->  
+
+  <!--  <script  src="./script2.js"></script> -->
+ <script  src="./vars.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
+
+<script src= "https://cdn.rawgit.com/hammerjs/touchemulator/0.0.2/touch-emulator.js"></script>
+<script>
+
+ TouchEmulator(); </script>
+
+<script type="text/javascript">
+
+
+var isMobile = false; //initiate as false
+// device detection
+if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|ipad|iris|kindle|Android|Silk|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(navigator.userAgent) 
+    || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(navigator.userAgent.substr(0,4))) { 
+    isMobile = true;
+};
+
+var isIos = false;
+function iOSversion() {
+
+  if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
+    if (!!window.indexedDB) { isIos = true; }
+    if (!!window.SpeechSynthesisUtterance) { isIos = true; }
+    if (!!window.webkitAudioContext) { isIos = true; }
+    if (!!window.matchMedia) { isIos = true; }
+    if (!!window.history && 'pushState' in window.history) { isIos = true; }
+   isIos = true;
+  }
+
+  //return 'Not an iOS device';
+}
+
+function getTextNodeHeight(textNode) {
+    var height = 0;
+    if (document.createRange) {
+        var range = document.createRange();
+        range.selectNodeContents(textNode);
+        if (range.getBoundingClientRect) {
+            var rect = range.getBoundingClientRect();
+            if (rect) {
+                height = rect.left - rect.right;
+            }
+        }
+    }
+    return height;
+}
+
+
+const easing = {
+  easeOutCubic: function(pos) {
+    return (Math.pow((pos-1), 3) +1);
+  },
+  easeOutQuart: function(pos) {//0.2*!*
+    return -(Math.pow((pos-1), 4) -1);//0.3-0.4*!*
+  },
+};
+
+function chechie(lst){ //0.1*!*
+ if (lst.length == 3 || lst.length == 6 || lst.length == 9 || lst.length == 18){return 18} 
+  else if (lst.length == 7){return 14} 
+    else if (lst.length == 11 || lst.length == 22){return 22}
+      else if (lst.length == 12){return 24}
+        else if (lst.length == 13){return 26}
+          else if (lst.length == 14){return 14}
+            else if (lst.length == 15){return 30}
+              else if (lst.length == 17){return 34}
+                else if (lst.length == 19){return 38}
+                  else if (lst.length == 21){return 42} 
+         else if (lst.length == 8 || lst.length == 16){return 16} else {return 20}
+
+};
+var out9;
+var previoussrc;
+var teclick = false;
+var zArr;
+var xArr;
+var blockerr = false;
+var ef;
+var same = true;
+var hold1;
+var hold2;
+//var hold3;
+var pressed;
+var notez = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+var chnamez = ["7sus4","m7/5+","madd11","m7","M7","M7sus4","M7/5-","add11","madd9","m9","m9-","M79","M7sus5-","9(no5)","13(no5)","7(dom)","m7/5-","madd9-/5-","madd11/5-","add9-/5-","9+(no5)","add11+","7/5-","7/5+","mM7","M7/5+","mM7/5-","add9+","madd11+","M79+","9-(no5)","add9+/5-","dim7","mM79"];
+var mordor = false;
+var fake = document.getElementsByClassName("date-selector")[0].children;
+var hodor = Array(fake.length).fill(false); //heavyweight dynamic
+var spin = 0; //alternative to this counter is hodor with true on spin/false input include method
+var frodo = false; 
+var printhodor = [];
+class IosSelector {
+  constructor(options) {
+    let defaults = {
+      el: '', // dom 
+      type: 'infinite', // infinite 无限滚动，normal 非无限 
+      count: 20, // 圆环规格，圆环上选项个数，必须设置 4 的倍数
+      sensitivity: 0.8, // 灵敏度
+      source: [], // 选项 {value: xx, text: xx}
+      value: null,
+      onChange: null
+    };
+
+    this.options = Object.assign({}, defaults, options);
+    //this.options.count =  this.options.count - this.options.count % 4;
+    Object.assign(this, this.options);
+
+    this.halfCount = this.options.count / 2;
+    this.quarterCount = this.options.count / 4;
+    this.a = this.options.sensitivity * 10; // 滚动减速度 0.1*!*
+    this.minV = Math.sqrt(1 / this.a); // 最小初速度
+    this.selected = this.source[0];
+
+    this.exceedA = 10; // 超出减速 
+    this.moveT = 0; // 滚动 tick
+    this.moving = false;
+
+    this.elems = {
+      el: document.querySelector(this.options.el), //0.1*!*
+      circleList: null,
+      circleItems: null, // list
+
+      highlight: null,
+      highlightList: null,
+      highListItems: null // list
+    };
+    this.events = {
+      touchstart: null,
+      touchmove: null,
+      touchend: null
+    };
+
+    this.itemHeight = 25;//this.elems.el.offsetHeight * 3 / this.options.count; // 每项高度
+    this.itemAngle = 360 / this.options.count; // 每项之间旋转度数
+    this.radius = this.itemHeight / Math.tan(this.itemAngle * Math.PI / 180); // 圆环半径 
+
+    this.scroll = 0; // 单位为一个 item 的高度（度数）
+    this._init(); //0.1*!*
+  }
+
+  _init() {
+    this._create(this.options.source);
+
+    let touchData = {
+      startY: 0,
+      yArr: []
+    };
+
+    for (let eventName in this.events) {
+      this.events[eventName] = ((eventName) => {
+        return (e) => { //0.8*!*
+          if (this.elems.el.contains(e.target) || e.target === this.elems.el) {//0.3*!*
+            e.preventDefault();
+            if (this.source.length) {
+              this['_' + eventName](e, touchData); //0.5-1.0*!*
+            }
+          }
+        };
+      })(eventName);//0.1*!*
+    }
+
+   this.elems.el.addEventListener('touchstart', this.events.touchstart); //0.3*!*
+    document.addEventListener('mousedown', this.events.touchstart); 
+   this.elems.el.addEventListener('touchend', this.events.touchend);
+    document.addEventListener('mouseup', this.events.touchend); //0.1*!*
+    if (this.source.length) {
+      this.value = this.value !== null ? this.value : this.source[0];
+      this.select(this.value);
+    }
+  }
+
+
+
+
+  _touchstart(e, touchData) { 
+   hold1 = this;
+   blockerr = true; 
+   this.elems.el.addEventListener('touchmove', this.events.touchmove)//}; //0.1*!*
+  if (same){//0.1*!*
+    document.addEventListener('mousemove', this.events.touchmove); 
+} else {document.removeEventListener('mousemove', this.events.touchmove)};
+
+    let eventY = e.clientY || e.touches[0].clientY;
+    touchData.startY = eventY;
+    touchData.yArr = [[eventY, new Date().getTime()]];//0.1-0.2*!*
+    touchData.touchScroll = this.scroll;//0.1*!*
+
+    this._stop();  
+ if (frodo && this.elems.el.parentElement.className == "date-selector") {spin++}
+  var test = this.scroll % 1 === 0;
+  if (!test && frodo && this.elems.el.parentElement.className == "date-selector") {--spin; 
+  //console.log(same + " " + spin);
+  document.getElementById("demo3").innerHTML = ("touchstart " + spin);
+}
+  }
+
+  _touchmove(e, touchData) { //0.1-0.3*!*
+ 
+    let eventY = e.clientY || e.touches[0].clientY;
+    touchData.yArr.push([eventY, new Date().getTime()]); //0.1-0.3*!*
+
+
+    if (touchData.length > 5) {
+      touchData.unshift(); //0.2*!*
+    }
+
+    let scrollAdd = (touchData.startY - eventY) / this.itemHeight;
+    let moveToScroll = scrollAdd + this.scroll;
+
+  
+    if (this.type === 'normal') {
+      if (moveToScroll < 0) {
+        moveToScroll *= 0.3;  
+      } else if (moveToScroll > this.source.length) { 
+        moveToScroll = this.source.length + (moveToScroll - this.source.length) * 0.3;
+      }
+    
+    } else {
+      moveToScroll = this._normalizeScroll(moveToScroll);
+
+    }
+
+    touchData.touchScroll = this._moveTo(moveToScroll);
+    hold2 = Math.round(touchData.touchScroll);
+    zArr = touchData;
+    xArr = e; //0.1*!*
+    //console.log(touchData.yArr.length);
+  // if (onoff == false){console.log(this.elems.el.className)};
+  }
+
+  _touchend(e, touchData) { 
+    this.elems.el.removeEventListener('touchmove', this.events.touchmove);
+    document.removeEventListener('mousemove', this.events.touchmove);
+
+    document.getElementById("demo3").innerHTML = ("draglength " + touchData.yArr.length);//1.3-1.7*!*
+if (!same){  document.removeEventListener('mousemove', hold1.events.touchmove); same = true;}
+
+    let v;
+
+    if (touchData.yArr.length === 1) {
+      v = 0;
+    } else {
+      let startTime = touchData.yArr[touchData.yArr.length - 2][1];
+      let endTime = touchData.yArr[touchData.yArr.length - 1][1];
+      let startY = touchData.yArr[touchData.yArr.length - 2][0];
+      let endY = touchData.yArr[touchData.yArr.length - 1][0];
+
+      // 计算速度
+      v = ((startY - endY) / this.itemHeight) * 1000 / (endTime - startTime);
+      let sign = v > 0 ? 1 : -1;
+
+      v = Math.abs(v) > 30 ? 30 * sign : v; //0.1*!*
+
+    }
+
+    this.scroll = touchData.touchScroll;//0.0*!*
+    this._animateMoveByInitV(v); //0.2*!*
+
+  }
+
+  _create(source) {
+
+    if (!source.length) {
+      return;
+    }
+
+    let template = `
+      <div class="select-wrap" ondragleave="dragLeave(event)">
+        <ul class="select-options" style="transform: translate3d(0, 0, ${-this.radius}px) rotateX(0deg);">
+          {{circleListHTML}}
+          <!-- <li class="select-option">a0</li> -->
+        </ul>
+        <div class="highlight" ondragleave="dragLeave(event)">
+          <ul class="highlight-list">
+            <!-- <li class="highlight-item"></li> -->
+            {{highListHTML}}
+          </ul>
+        </div>
+      </div>
+    `;
+
+    // source 处理
+    if (this.options.type === 'infinite') {
+      let concatSource = [].concat(source); //0.1*!*
+     previoussrc = source;
+      while (concatSource.length < this.halfCount) {
+        concatSource = concatSource.concat(source);
+      }
+      source = concatSource;
+    }
+    this.source = source; 
+    let sourceLength = source.length;
+
+    // 圆环 HTML
+    let circleListHTML = '';
+    for (let i = 0; i < source.length; i++) {
+      circleListHTML += `<li class="select-option"
+                    style="
+                      top: ${this.itemHeight * -0.5}px;
+                      height: ${this.itemHeight}px;
+                      line-height: ${this.itemHeight}px;
+                      transform: rotateX(${-this.itemAngle * i}deg) translate3d(0, 0, ${this.radius}px);
+                    "
+                    data-index="${i}"
+                    ><span>${source[i]}</span></li>`
+    }
+
+    let highListHTML = '';
+    for (let i = 0; i < source.length; i++) {//0.1*!*
+      highListHTML += `<li class="highlight-item" style="height: ${this.itemHeight}px;">
+                        ${source[i]} 
+                      </li>`
+    }
+
+
+    if (this.options.type === 'infinite') {
+    var filtsrc = 0;
+    var ls = previoussrc.length;
+    if (ls == 1 || ls == 2 || ls == 5 || ls == 8 || ls == 10 || ls == 12 || ls == 20)
+      {filtsrc = this.quarterCount} else 
+      if (ls == 3 || ls == 7 || ls == 9 || ls == 11 || ls == 13 || ls == 15 || ls == 17 || ls == 19) 
+        {filtsrc = this.quarterCount - 1} else 
+       if (ls == 4){filtsrc = this.quarterCount - 2} else
+        if (ls == 6){filtsrc = this.quarterCount - 4} else
+            if (ls == 34 || ls == 14 || ls == 16 || ls == 18){filtsrc = 0};
+
+      var togg3 = this.quarterCount;
+      if (ls == 34 || ls == 16 || ls == 18 || ls == 14){togg3 = 0};
+      for (let i = 0; i < filtsrc; i++) {
+
+        circleListHTML = `<li class="select-option"
+                      style="
+                        top: ${this.itemHeight * -0.5}px;
+                        height: ${this.itemHeight}px;
+                        line-height: ${this.itemHeight}px;
+                        transform: rotateX(${this.itemAngle * (i + 1)}deg) translate3d(0, 0, ${this.radius}px);
+                      "
+                      data-index="${-i - 1}"
+                      ><span>${source[sourceLength - i - 1]}</span></li>` + circleListHTML;
+                    }
+
+         for (let i = 0; i < togg3; i++) {//line-height 0.1*!*
+        circleListHTML += `<li class="select-option"
+                      style="
+                        top: ${this.itemHeight * -0.5}px;
+                        height: ${this.itemHeight}px;
+                        line-height: ${this.itemHeight}px;
+                        transform: rotateX(${-this.itemAngle * (i + sourceLength)}deg) translate3d(0, 0, ${this.radius}px);
+                      "
+                      data-index="${i + sourceLength}"
+                      ><span>${source[i]}</span></li>`;
+      }
+
+      highListHTML = `<li class="highlight-item" style="height: ${this.itemHeight}px;">
+                          ${source[sourceLength - 1]}
+                      </li>` + highListHTML;
+      highListHTML += `<li class="highlight-item" style="height: ${this.itemHeight}px;">${source[0]}</li>`
+    }
+
+    this.elems.el.innerHTML = template //05-09*!*
+                                .replace('{{circleListHTML}}', circleListHTML)
+                                .replace('{{highListHTML}}', highListHTML);//1.1-5.7!* //13.3 for big list
+    this.elems.circleList = this.elems.el.querySelector('.select-options');//0.3*!*
+    this.elems.circleItems = this.elems.el.querySelectorAll('.select-option');
+
+
+    this.elems.highlight = this.elems.el.querySelector('.highlight');
+    this.elems.highlightList = this.elems.el.querySelector('.highlight-list');
+    this.elems.highlightitems = this.elems.el.querySelectorAll('.highlight-item');
+
+    if (this.type === 'infinite') {
+      this.elems.highlightList.style.top = -this.itemHeight + 'px'; //0.2*!*
+    }
+
+    this.elems.highlight.style.height = this.itemHeight + 'px';
+    this.elems.highlight.style.lineHeight = this.itemHeight + 'px'; //0.1
+
+  }
+
+
+  _normalizeScroll(scroll) {//0.4*!*
+    let normalizedScroll = scroll;
+
+    while(normalizedScroll < 0) {
+      normalizedScroll += this.source.length;
+    }
+    normalizedScroll = normalizedScroll % this.source.length;
+    return normalizedScroll;
+  }
+
+
+  _moveTo(scroll) {//0.2-0.3!*!*
+    if (this.type === 'infinite') {
+      scroll = this._normalizeScroll(scroll);//0.1
+    }
+    this.elems.circleList.style.transform = `translate3d(0, 0, ${-this.radius}px) rotateX(${this.itemAngle * scroll}deg)`;//25.2-32.7*!**!*
+    this.elems.highlightList.style.transform = `translate3d(0, ${-(scroll) * this.itemHeight}px, 0)`;//1.2-1.3*!*
+/*
+    [...this.elems.circleItems].forEach(itemElem => { //dodgy 0.1 - 12.6 - 40.8*!*
+      if (Math.abs(itemElem.dataset.index - scroll) > this.quarterCount) {//14.9*!*
+        itemElem.style.visibility = 'visible';//10.3*!*
+      } else {
+        itemElem.style.visibility = 'visible';//6.8*!*
+      }
+    });
+*/
+
+    return scroll;
+  }
+
+
+  async _animateMoveByInitV(initV) {
+
+ 
+
+    let initScroll;
+    let finalScroll;
+    let finalV;
+
+    let totalScrollLen;
+    let a;
+    let t;
+
+    if (this.type === 'normal') {
+
+      if (this.scroll < 0 || this.scroll > this.source.length - 1) {
+        a = this.exceedA;
+        initScroll = this.scroll;
+        finalScroll = this.scroll < 0 ? 0 : this.source.length - 1;
+        totalScrollLen = initScroll - finalScroll;
+
+        t = Math.sqrt(Math.abs(totalScrollLen / a));
+        initV = a * t;
+        initV = this.scroll > 0 ? -initV : initV;
+        finalV = 0;
+//console.log("test");
+        await this._animateToScroll(initScroll, finalScroll, t); 
+      
+
+      } else {
+        initScroll = this.scroll;
+        a = initV > 0 ? -this.a : this.a;
+        t = Math.abs(initV / a); 
+        totalScrollLen = initV * t + a * t * t / 2; 
+        finalScroll = Math.round(this.scroll + totalScrollLen); 
+        finalScroll = finalScroll < 0 ? 0 : (finalScroll > this.source.length - 1 ? this.source.length - 1 : finalScroll);
+
+        totalScrollLen = finalScroll - initScroll;
+        t = Math.sqrt(Math.abs(totalScrollLen / a));
+        await this._animateToScroll(this.scroll, finalScroll, t, 'easeOutQuart');
+      }
+
+    } else {
+      initScroll = this.scroll;
+
+      a = initV > 0 ? -this.a : this.a;
+      t = Math.abs(initV / a); 
+      totalScrollLen = initV * t + a * t * t / 2; 
+      finalScroll = Math.round(this.scroll + totalScrollLen); 
+      await this._animateToScroll(this.scroll, finalScroll, t, 'easeOutQuart');
+    }
+
+    
+    this._selectByScroll(this.scroll);//0.1*!*
+  }
+  
+  _animateToScroll(initScroll, finalScroll, t, easingName = 'easeOutQuart') {//0.1 *!*
+  
+
+
+    if (initScroll === finalScroll || t === 0) { 
+      this._moveTo(initScroll);         
+
+//*************************************************USER STOP SPIN START*********************************************************
+$('img').hide();//0.1*!*
+      if (frodo) {if (this.elems.el.parentElement.className == "date-selector") //0.1*!*
+      {spin--; //console.log(same + " " + spin);
+      document.getElementById("demo3").innerHTML = ("touchblock " + spin); //0.2*!*
+
+
+      }; //user startcheck                            <----------------------SPIN(--)
+   for (var h = 0; h < fake.length; h++) { 
+      if (fake[h].className == this.elems.el.className) // divcheck //0.1*!*
+        { hodor[h] = this.source[Math.floor(this.scroll)]; // export data //0.0*!*
+
+          if (spin === 0) { //counter; 0 = allstop
+    ////////////////////vars2.js
+    myFunction2();
+    ////////////////////
+                                                           
+//////////////////////////////////////////////////////// Show + hide + perspective + dom hr ////////////////////////////////////////////////////////
+                         
+                          for (var f = 0; f < document.getElementsByClassName("nest")[0].children.length; f++)    {   
+                               document.getElementsByClassName("nest")[0].children[f].style.display = 'block'};
+                             //hid
+                          for (var f = document.getElementsByClassName("nest")[0].children.length; f >  e.length; f--)    {   
+                               document.getElementsByClassName("nest")[0].children[f - 1].style.display = 'none'};
+                             ///perspective
+                          var beta = document.getElementsByClassName("nest")[0].children;
+                          var kappa = [];
+                          for (var s = 0; s < beta.length; s++){if (beta[s].style.display != "none") {kappa.push(s)}}
+                          for (var i = 1, j = kappa.length; i <= kappa.length; i++, j--) 
+                          {beta[kappa[i-1]].setAttribute("style", "-moz-perspective: 1200px; -moz-perspective-origin: " + ((i-j)*-50 +50) + "%")}
+                             ////hr dom delimiter
+                         for (var g = 0; g < document.getElementById("demo2").children[0].children.length; g++) {
+                          document.getElementById("demo2").children[0].children[g].appendChild(document.createElement("HR")); };
+///baaaaad above the set perspective must be static css but impossible 
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////                          
+
+if (this.elems.el.parentElement.className == "date-selector")  {
+ e01Selector = new IosSelector({
+  el: '#e01',
+  type: 'infinite',
+  source: e[0].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(","),
+  count: chechie(e[0].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(",")) 
+}); //e01Selector.select(e01Selector.source[Math.floor(Math.random()*e01Selector.source.length)]); //0.2*!*replace e
+
+if (e.length > 1)  {
+ e02Selector = new IosSelector({
+  el: '#e02',
+  type: 'infinite',
+  source: e[1].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(","),
+  count: chechie(e[1].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(",")) 
+}); //e02Selector.select(e02Selector.source[Math.floor(Math.random()*e02Selector.source.length)]); 
+};
+
+if (e.length > 2)  {
+ e03Selector = new IosSelector({
+  el: '#e03',
+  type: 'infinite',
+  source: e[2].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(","),
+  count: chechie(e[2].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(",")) 
+}); //e03Selector.select(e03Selector.source[Math.floor(Math.random()*e03Selector.source.length)]); 
+}; 
+
+if (e.length > 3)  {
+ e04Selector = new IosSelector({
+  el: '#e04',
+  type: 'infinite',
+  source: e[3].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(","),
+  count: chechie(e[3].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(",")) 
+}); //e04Selector.select(e04Selector.source[Math.floor(Math.random()*e04Selector.source.length)]);
+}; 
+
+if (e.length > 4)  {
+ e05Selector = new IosSelector({
+  el: '#e05',
+  type: 'infinite',
+  source: e[4].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(","),
+  count: chechie(e[4].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(",")) 
+}); //e05Selector.select(e05Selector.source[Math.floor(Math.random()*e05Selector.source.length)]);
+}; 
+
+if (e.length > 5)  {
+ e06Selector = new IosSelector({
+  el: '#e06',
+  type: 'infinite',
+  source: e[5].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(","),
+  count: chechie(e[5].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(",")) 
+}); //e06Selector.select(e06Selector.source[Math.floor(Math.random()*e06Selector.source.length)]);
+};  
+
+if (e.length > 6)  {
+ e07Selector = new IosSelector({
+  el: '#e07',
+  type: 'infinite',
+  source: e[6].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(","),
+  count: chechie(e[6].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(",")) 
+}); //e07Selector.select(e07Selector.source[Math.floor(Math.random()*e07Selector.source.length)]);
+};  
+
+if (e.length > 7)  {
+ e08Selector = new IosSelector({
+  el: '#e08',
+  type: 'infinite',
+  source: e[7].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(","),
+  count: chechie(e[7].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(",")) 
+}); //e08Selector.select(e08Selector.source[Math.floor(Math.random()*e08Selector.source.length)]);
+};   
+
+if (e.length > 8)  {
+ e09Selector = new IosSelector({
+  el: '#e09',
+  type: 'infinite',
+  source: e[8].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(","),
+  count: chechie(e[8].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(",")) 
+}); //e09Selector.select(e09Selector.source[Math.floor(Math.random()*e09Selector.source.length)]);
+};    
+
+if (e.length > 9)  {
+ e10Selector = new IosSelector({
+  el: '#e10',
+  type: 'infinite',
+  source: e[9].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(","),
+  count: chechie(e[9].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(",")) 
+}); //e10Selector.select(e10Selector.source[Math.floor(Math.random()*e10Selector.source.length)]);
+};   
+
+if (e.length > 10)  {
+ e11Selector = new IosSelector({
+  el: '#e11',
+  type: 'infinite',
+  source: e[10].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(","),
+  count: chechie(e[10].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(",")) 
+}); //e11Selector.select(e11Selector.source[Math.floor(Math.random()*e11Selector.source.length)]);
+};    
+
+if (e.length > 11)  {
+ e12Selector = new IosSelector({
+  el: '#e12',
+  type: 'infinite',
+  source: e[11].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(","),
+  count: chechie(e[11].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(",")) 
+}); //e12Selector.select(e12Selector.source[Math.floor(Math.random()*e12Selector.source.length)]);
+};   
+
+} 
+
+     //       console.log(hodor[0] + " " + hodor[1] + "," + hodor[3] + " " + hodor[4] + " spin: " + spin + " e.length " + e.length)
+   } }  }  
+                }  // END If FRODO
+      return;
+    } // end default stopcondition initScroll === finalScroll || t === 0
+//*************************************************USER STOP SPIN END***********************************************************    
+    let start = new Date().getTime() / 1000; //0.1*!*
+    let pass = 0;
+    let totalScrollLen = finalScroll - initScroll; 
+    return new Promise((resolve, reject) => {
+
+      this.moving = true; 
+      let tick = () => { //0.1-0.7 *!*
+        pass = new Date().getTime() / 1000 - start; //1.8-2.8 *!*
+        if (pass < t) {
+          this.scroll = this._moveTo(initScroll + easing[easingName](pass / t) * totalScrollLen);//0.4-1.3 *!*
+          this.moveT = requestAnimationFrame(tick); //3.3-6.2 *!*
+//======================================= if moving at start reset false
+  if (hodor[0] == false || hodor[1] == false || hodor[3] == false || hodor[4] == false) //0.1-0.3 *!*
+  {
+   for (var h = 0; h < fake.length; h++) { 
+      if (fake[h].className == this.elems.el.className) 
+        { hodor[h] = true; 
+         // check for initial rotation; if fail see NO initial rotation
+        }} // init check to be expanded into dynamic feeding "flaps"
+  }; 
+        } // end if pass (not moving any more)
+         else {
+
+          resolve();
+          this._stop();
+   //           this.moving = false;
+   // cancelAnimationFrame(this.moveT); 
+          this.scroll = this._moveTo(initScroll + totalScrollLen); 
+  // hold2 = this.scroll;
+//^^^^^^^^^^^^^^^^^^^^^^^^^ THIS IS INIT ROTATION ONLY AT START (NO USER STOP SPIN) -> FRODO is false ^^^^^ NO SPIN YET ^^^^^^^^^^^^^^^^^^^
+//console.log(onoff);
+     for (var h = 0; h < fake.length; h++) { 
+      if (fake[h].className == this.elems.el.className) // 0.1 *!*
+        {hodor[h] = this.source[this.scroll]; }}  // export data
+       
+     if (!hodor.includes(true) && frodo == false)  //disconnect from init still rotating
+      {        for (var u = 0; u < fake.length; u++){
+         if (hodor[0] == false || hodor[1] == false || hodor[3] == false || hodor[4] == false) 
+         {
+       //NO Initial rotation (use input array first index)
+          if (u === 0 || u === 3){ hodor[u] = notez[0] } 
+            else if (u === 1 || u === 4) {hodor[u] = chnamez[0]}}};  
+       //NO Initial rotation end
+//////////////////////////////////////////       
+       myFunction2();
+//////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////// Show + hide + perspective + dom hr ////////////////////////////////////////////////////
+                   
+                          for (var f = 0; f < document.getElementsByClassName("nest")[0].children.length; f++)    {   
+                               document.getElementsByClassName("nest")[0].children[f].style.display = 'block'};
+                             //hide inactive
+                          for (var f = document.getElementsByClassName("nest")[0].children.length; f >  e.length; f--)    {   
+                               document.getElementsByClassName("nest")[0].children[f - 1].style.display = 'none'};
+                             ///perspective
+                          var beta = document.getElementsByClassName("nest")[0].children;
+                          var kappa = [];
+                          for (var s = 0; s < beta.length; s++){if (beta[s].style.display != "none") {kappa.push(s)}}
+                          for (var i = 1, j = kappa.length; i <= kappa.length; i++, j--) 
+                          {beta[kappa[i-1]].setAttribute("style", "-moz-perspective: 1200px; -moz-perspective-origin: " + ((i-j)*-50 +50) + "%")}
+                             ////hr dom delimiter
+                         for (var g = 0; g < document.getElementById("demo2").children[0].children.length; g++) {
+                          document.getElementById("demo2").children[0].children[g].appendChild(document.createElement("HR")); };
+
+///baaaaad above the set perspective must be static css
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+
+
+///init NO CONDITION - NEEDS TO BE -
+ e01Selector = new IosSelector({
+  el: '#e01',
+  type: 'infinite',
+  source: e[0].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(","),
+  count: chechie(e[0].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(",")) 
+}); //e01Selector.select(e01Selector.source[Math.floor(Math.random()*e01Selector.source.length)]);
+
+if (e.length > 1)  {
+ e02Selector = new IosSelector({
+  el: '#e02',
+  type: 'infinite',
+  source: e[1].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(","),
+  count: chechie(e[1].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(",")) 
+}); //e02Selector.select(e02Selector.source[Math.floor(Math.random()*e02Selector.source.length)]); 
+};
+
+if (e.length > 2)  {
+ e03Selector = new IosSelector({
+  el: '#e03',
+  type: 'infinite',
+  source: e[2].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(","),
+  count: chechie(e[2].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(",")) 
+}); //e03Selector.select(e03Selector.source[Math.floor(Math.random()*e03Selector.source.length)]); 
+}; 
+
+if (e.length > 3)  {
+ e04Selector = new IosSelector({
+  el: '#e04',
+  type: 'infinite',
+  source: e[3].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(","),
+  count: chechie(e[3].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(",")) 
+}); //e04Selector.select(e04Selector.source[Math.floor(Math.random()*e04Selector.source.length)]);
+}; 
+
+if (e.length > 4)  {
+ e05Selector = new IosSelector({
+  el: '#e05',
+  type: 'infinite',
+  source: e[4].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(","),
+  count: chechie(e[4].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(",")) 
+}); //e05Selector.select(e05Selector.source[Math.floor(Math.random()*e05Selector.source.length)]);
+}; 
+
+if (e.length > 5)  {
+ e06Selector = new IosSelector({
+  el: '#e06',
+  type: 'infinite',
+  source: e[5].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(","),
+  count: chechie(e[5].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(",")) 
+});// e06Selector.select(e06Selector.source[Math.floor(Math.random()*e06Selector.source.length)]);
+};  
+
+if (e.length > 6)  {
+ e07Selector = new IosSelector({
+  el: '#e07',
+  type: 'infinite',
+  source: e[6].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(","),
+  count: chechie(e[6].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(",")) 
+});// e07Selector.select(e07Selector.source[Math.floor(Math.random()*e07Selector.source.length)]);
+};  
+
+if (e.length > 7)  {
+ e08Selector = new IosSelector({
+  el: '#e08',
+  type: 'infinite',
+  source: e[7].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(","),
+  count: chechie(e[7].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(",")) 
+});// e08Selector.select(e08Selector.source[Math.floor(Math.random()*e08Selector.source.length)]);
+};   
+
+if (e.length > 8)  {
+ e09Selector = new IosSelector({
+  el: '#e09',
+  type: 'infinite',
+  source: e[8].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(","),
+  count: chechie(e[8].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(",")) 
+}); //e09Selector.select(e09Selector.source[Math.floor(Math.random()*e09Selector.source.length)]);
+};    
+
+if (e.length > 9)  {
+ e10Selector = new IosSelector({
+  el: '#e10',
+  type: 'infinite',
+  source: e[9].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(","),
+  count: chechie(e[9].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(",")) 
+});// e10Selector.select(e10Selector.source[Math.floor(Math.random()*e10Selector.source.length)]);
+};   
+
+if (e.length > 10)  {
+ e11Selector = new IosSelector({
+  el: '#e11',
+  type: 'infinite',
+  source: e[10].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(","),
+  count: chechie(e[10].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(",")) 
+});// e11Selector.select(e11Selector.source[Math.floor(Math.random()*e11Selector.source.length)]);
+};    
+
+if (e.length > 11)  {
+ e12Selector = new IosSelector({
+  el: '#e12',
+  type: 'infinite',
+  source: e[11].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(","),
+  count: chechie(e[11].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(",")) 
+}); //e12Selector.select(e12Selector.source[Math.floor(Math.random()*e12Selector.source.length)]);
+};   
+  
+ 
+ //^^^^^^^^^^^^^^^^^^^^^^^^^ INIT ROTATION ONLY AT START (NO USER STOP SPIN) END -> FRODO is now true ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+       frodo = true} //set init end
+       
+     else if (frodo) // user interaction start
+
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% NORMAL SPIN END BEGIN %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      
+      {if (this.elems.el.parentElement.className == "date-selector") 
+      {spin--; //console.log(same + " " + spin);
+      document.getElementById("demo3").innerHTML = ("spinend " + spin);//0.3*!*
+
+      }; 
+
+if (spin == 0)
+       {
+//////////////////////////////////////////////////////    
+       myFunction2();//0.1*!*
+
+
+//////////////////////////////////////////////////////
+// ef = 
+//////////////////////////////////////////////////////// Show + hide + perspective + dom hr ////////////////////////////////////////////////////////
+                         
+                          for (var f = 0; f < document.getElementsByClassName("nest")[0].children.length; f++)    {//0.1-0.7 *!*  
+                               document.getElementsByClassName("nest")[0].children[f].style.display = 'block'};//0.2-0.4*!*
+                             //hide inactive
+                          for (var f = document.getElementsByClassName("nest")[0].children.length; f >  e.length; f--) {//0.1-0.4*!*
+                               document.getElementsByClassName("nest")[0].children[f - 1].style.display = 'none'};
+                             ///perspective
+                          var beta = document.getElementsByClassName("nest")[0].children;
+                          var kappa = [];
+                          for (var s = 0; s < beta.length; s++){if (beta[s].style.display != "none") {kappa.push(s)}}
+                          for (var i = 1, j = kappa.length; i <= kappa.length; i++, j--) 
+                          {beta[kappa[i-1]].setAttribute("style", "-moz-perspective: 1200px; -moz-perspective-origin: " + ((i-j)*-50 +50) + "%")}//0.1*!*
+                             ////hr dom delimiter
+                         for (var g = 0; g < document.getElementById("demo2").children[0].children.length; g++) {
+                          document.getElementById("demo2").children[0].children[g].appendChild(document.createElement("HR")); };
+
+///baaaaad above the set perspective must be static css SetAttribute alsobad
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////                          
+ 
+if (this.elems.el.parentElement.className == "date-selector")  {
+
+ e01Selector = new IosSelector({
+  el: '#e01',
+  type: 'infinite',
+  source: e[0].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(","),//0.1*!*
+  count: chechie(e[0].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(","))
+}); //e01Selector.select(e01Selector.source[Math.floor(Math.random()*e01Selector.source.length)]);
+
+if (e.length > 1)  {
+ e02Selector = new IosSelector({
+  el: '#e02',
+  type: 'infinite',
+  source: e[1].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(","),
+  count: chechie(e[1].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(","))
+});// e02Selector.select(e02Selector.source[Math.floor(Math.random()*e02Selector.source.length)]); //0.1*!*count
+};
+
+if (e.length > 2)  {
+ e03Selector = new IosSelector({
+  el: '#e03',
+  type: 'infinite',
+  source: e[2].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(","),
+  count: chechie(e[2].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(",")) 
+});// e03Selector.select(e03Selector.source[Math.floor(Math.random()*e03Selector.source.length)]); 
+}; 
+
+if (e.length > 3)  {
+ e04Selector = new IosSelector({
+  el: '#e04',
+  type: 'infinite',
+  source: e[3].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(","),
+  count: chechie(e[3].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(",")) 
+});// e04Selector.select(e04Selector.source[Math.floor(Math.random()*e04Selector.source.length)]);
+}; 
+
+if (e.length > 4)  {
+ e05Selector = new IosSelector({
+  el: '#e05',
+  type: 'infinite',
+  source: e[4].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(","),
+  count: chechie(e[4].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(",")) 
+});// e05Selector.select(e05Selector.source[Math.floor(Math.random()*e05Selector.source.length)]);
+}; 
+
+if (e.length > 5)  {
+ e06Selector = new IosSelector({
+  el: '#e06',
+  type: 'infinite',
+  source: e[5].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(","),
+  count: chechie(e[5].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(",")) 
+});// e06Selector.select(e06Selector.source[Math.floor(Math.random()*e06Selector.source.length)]);
+};  
+
+if (e.length > 6)  {
+ e07Selector = new IosSelector({
+  el: '#e07',
+  type: 'infinite',
+  source: e[6].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(","),
+  count: chechie(e[6].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(",")) 
+}); //e07Selector.select(e07Selector.source[Math.floor(Math.random()*e07Selector.source.length)]); //0.1*!* sourse
+};  
+
+if (e.length > 7)  {
+ e08Selector = new IosSelector({
+  el: '#e08',
+  type: 'infinite',
+  source: e[7].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(","),
+  count: chechie(e[7].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(",")) 
+}); //e08Selector.select(e08Selector.source[Math.floor(Math.random()*e08Selector.source.length)]);
+};   
+
+if (e.length > 8)  {
+ e09Selector = new IosSelector({
+  el: '#e09',
+  type: 'infinite',
+  source: e[8].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(","),
+  count: chechie(e[8].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(",")) 
+});// e09Selector.select(e09Selector.source[Math.floor(Math.random()*e09Selector.source.length)]);
+};    
+
+if (e.length > 9)  {
+ e10Selector = new IosSelector({
+  el: '#e10',
+  type: 'infinite',
+  source: e[9].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(","),
+  count: chechie(e[9].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(",")) 
+});// e10Selector.select(e10Selector.source[Math.floor(Math.random()*e10Selector.source.length)]);
+};   
+
+if (e.length > 10)  {
+ e11Selector = new IosSelector({
+  el: '#e11',
+  type: 'infinite',
+  source: e[10].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(","),
+  count: chechie(e[10].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(",")) 
+});// e11Selector.select(e11Selector.source[Math.floor(Math.random()*e11Selector.source.length)]);
+};    
+
+if (e.length > 11)  {
+ e12Selector = new IosSelector({
+  el: '#e12',
+  type: 'infinite',
+  source: e[11].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(","),
+  count: chechie(e[11].replace(/[*]/g, String.fromCharCode(160)).replace(/,([^,]*)$/, "").replace("(no5)","").split(",")) 
+});// e12Selector.select(e12Selector.source[Math.floor(Math.random()*e12Selector.source.length)]);
+};   
+
+} 
+
+//console.log(onoff);
+//console.log(hodor[0] + " " + hodor[1] + "," + hodor[3] + " " + hodor[4] + " spin: " + spin + " e.length " + e.length); 
+
+     }};  
+ 
+ //console.log("end eval " + spin);
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% end ifconditions     
+        }
+      };
+      tick();  //comes before above at mouserelease
+    }); 
+  }
+//replace("o","");// if (hodor.filter(value => value).length == 1 || spin{
+  _stop() {
+    this.moving = false;
+    cancelAnimationFrame(this.moveT); 
+  }
+
+  _selectByScroll(scroll) {
+    scroll = this._normalizeScroll(scroll) | 0; 
+    if (scroll > this.source.length - 1) {//0.1*!*
+      scroll = this.source.length - 1;
+      this._moveTo(scroll);
+    }
+    this._moveTo(scroll); //0.2*!*
+    this.scroll = scroll;
+    this.selected = this.source[scroll]; //does this mean clickstop? 0.1*!*
+    this.value = this.selected.value; 
+    this.onChange && this.onChange(this.selected);
+  }
+
+  updateSource(source) {
+    this._create(source);
+
+    if (!this.moving) {
+      this._selectByScroll(this.scroll);
+    }
+  }
+
+  select(value) {
+    for (let i = 0; i < this.source.length; i++) {
+      if (this.source[i] === value) {
+        window.cancelAnimationFrame(this.moveT);
+        // this.scroll = this._moveTo(i);
+        let initScroll = this._normalizeScroll(this.scroll);
+        let finalScroll = i;
+        let t = Math.sqrt(Math.abs((finalScroll -  initScroll) / this.a));
+        this._animateToScroll(initScroll, finalScroll, t);
+        setTimeout(() => this._selectByScroll(i));//0.1-2.5*!*
+     //   console.log(this.moveT);
+        return;
+      }
+    }
+    throw new Error(`can not select value: ${value}, ${value} match nothing in current source`);
+  }
+
+  destroy() {
+    this._stop();
+    // document 事件解绑
+    for (let eventName in this.events) {
+      this.elems.el.removeEventListener('eventName', this.events[eventName]);
+    }
+    document.removeEventListener('mousedown', this.events['touchstart']);
+    document.removeEventListener('mousemove', this.events['touchmove']);
+    document.removeEventListener('mouseup', this.events['touchend']);
+    // 元素移除
+    this.elems.el.innerHTML = '';
+    this.elems = null;
+   // console.log("daafeaaf");
+  }
+
+}
+
+
+note1Selector = new IosSelector({
+  el: '#note1',
+  type: 'infinite',
+  source: notez, 
+  count: 24
+});
+
+chord1Selector = new IosSelector({
+  el: '#chord1',
+  type: 'infinite',
+  source: chnamez,
+  count: 34
+});
+
+note2Selector = new IosSelector({
+  el: '#note2',
+  type: 'infinite',
+  source: notez,
+  count: 24
+});
+
+chord2Selector = new IosSelector({
+  el: '#chord2',
+  type: 'infinite',
+  source: chnamez,
+  count: 34
+});
+
+var e01Selector;
+var e02Selector;
+var e03Selector;
+var e04Selector;
+var e05Selector;
+var e06Selector;
+var e07Selector;
+var e08Selector;
+var e09Selector;
+var e10Selector;
+var e11Selector;
+var e12Selector;
+
+//useful
+/*
+$.fn.removeText = function() {
+    for (var i=this.length-1; i>=0; --i) removeText(this[i]);
+};
+function removeText(node) {
+    if (!node) return;
+    for (var i=node.childNodes.length-1; i>=0; --i) {
+        var childNode = node.childNodes[i];
+        if (childNode.nodeType === 3) node.removeChild(childNode);
+        else if (childNode.nodeType === 1) removeText(childNode);
+    }   
+}
+*/
+
+
+setTimeout(function() {
+  note1Selector.select(notez[Math.floor(Math.random()*notez.length)]); //rotates ring if used on console!!!!
+  chord1Selector.select(chnamez[Math.floor(Math.random()*chnamez.length)]);
+  note2Selector.select(notez[Math.floor(Math.random()*notez.length)]);
+  chord2Selector.select(chnamez[Math.floor(Math.random()*chnamez.length)]);
+});
+
+var findBody = document.querySelector ('body');
+
+function findContent(event) {
+  if (pressed != event.target.parentElement.className)  { 
+   same = false; 
+
+
+if (hold1.el == "#day1" || hold1.el == "#year1") { 
+                 hold1.select(notez[hold2]);
+       } else {  hold1.select(chnamez[hold2]); }
+} else {same = true; 
+};   
+}
+
+
+if (hold1 != undefined) {findBody.onmouseup = findContent};
+
+
+var piano;
+ piano = true;
+var guitar;
+ guitar = true;
+
+var limall_all = [lim0_all, lim1_all, lim2_all, lim3_all, lim4_all, lim5_all, lim6_all, lim7_all, lim8_all, lim9_all, lim10_all, lim11_all, lim12_all, lim13_all, lim14_all, lim15_all, lim16_all, lim17_all, lim18_all, lim19_all, lim20_all, lim21_all, lim22_all, lim23_all, lim24_all, lim25_all, lim26_all, lim27_all, lim28_all, lim29_all, lim30_all, lim31_all, lim32_all, lim33_all];
+var keylist = ["key00 C", "key01 C#", "key02 D", "key03 D#", "key04 E", "key05 F", "key06 F#", "key07 G", "key08 G#", "key09 A", "key10 A#", "key11 B"];
+
+var notes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+var ecolor = ["BBBBBB","66FF66","FFDF00", "F8A23B", "FB9090", "D95725","FF0000","9000AC","B285FF"
+    ,"3565A5"
+    ,"5a5a82"
+    ,"4F7942","696969"];
+var chall = ["SESUSFU,", "MMSE/FEPlU,", "MMAddEE,", "MMSE,", "MSE,", "MSESUSFU,", "MSE/FEMin,", "AddEE,", "MMAddnn,", "MMnn,", "MMnnMin,", "MSEnn,", "MSESUSFEMin,", "nn(nOFE),", "TT(nOFE),", "SE(dOMM),", "MMSE/FEMin,", "MMAddnnMin/FEMin,", "MMAddEE/FEMin,", "AddnnMin/FEMin,", "nnPlU(nOFE),", "AddEEPlU,", "SE/FEMin,", "SE/FEPlU,", "MMMSE,", "MSE/FEPlU,", "MMMSE/FEMin,", "AddnnPlU,", "MMAddEEPlU,", "MSEnnPlU,", "nnMin(nOFE),", "AddnnPlU/FEMin,", "diMMSE,", "MMMSEnn,"] ;
+var chname = ["7sus4","m7/5+","madd11","m7","M7","M7sus4","M7/5-","add11","madd9","m9","m9-","M79","M7sus5-","9(no5)","13(no5)","7(dom)","m7/5-","madd9-/5-","madd11/5-","add9-/5-","9+(no5)","add11+","7/5-","7/5+","mM7","M7/5+","mM7/5-","add9+","madd11+","M79+","9-(no5)","add9+/5-","dim7","mM79"];
+var chname0 = ["7sus4", "m7/5+", "madd11", "m7", "M7", "M7sus4", "M7/5-", "add11", "madd9", "m9", "m9-", "M79", "M7sus5-", "9(no5)", "13(no5)", "7(dom)", "m7/5-", "madd9-/5-", "madd11/5-", "add9-/5-", "9+(no5)", "add11+", "7/5-", "7/5+", "mM7", "M7/5+", "mM7/5-", "add9+", "madd11+", "M79+", "9-(no5)", "add9+/5-", "dim7", "mM79"]; var chname1 = ["m7/5+", "madd11", "m7", "M7", "M7sus4", "M7/5-", "add11", "madd9", "m9", "m9-", "M79", "M7sus5-", "9(no5)", "13(no5)", "7(dom)", "m7/5-", "madd9-/5-", "madd11/5-", "add9-/5-", "9+(no5)", "add11+", "7/5-", "7/5+", "mM7", "M7/5+", "mM7/5-", "add9+", "madd11+", "M79+", "9-(no5)", "add9+/5-", "dim7", "mM79", "7sus4"]; var chname2 = ["madd11", "m7", "M7", "M7sus4", "M7/5-", "add11", "madd9", "m9", "m9-", "M79", "M7sus5-", "9(no5)", "13(no5)", "7(dom)", "m7/5-", "madd9-/5-", "madd11/5-", "add9-/5-", "9+(no5)", "add11+", "7/5-", "7/5+", "mM7", "M7/5+", "mM7/5-", "add9+", "madd11+", "M79+", "9-(no5)", "add9+/5-", "dim7", "mM79", "7sus4", "m7/5+"]; var chname3 = ["m7", "M7", "M7sus4", "M7/5-", "add11", "madd9", "m9", "m9-", "M79", "M7sus5-", "9(no5)", "13(no5)", "7(dom)", "m7/5-", "madd9-/5-", "madd11/5-", "add9-/5-", "9+(no5)", "add11+", "7/5-", "7/5+", "mM7", "M7/5+", "mM7/5-", "add9+", "madd11+", "M79+", "9-(no5)", "add9+/5-", "dim7", "mM79", "7sus4", "m7/5+", "madd11"]; var chname4 = ["M7", "M7sus4", "M7/5-", "add11", "madd9", "m9", "m9-", "M79", "M7sus5-", "9(no5)", "13(no5)", "7(dom)", "m7/5-", "madd9-/5-", "madd11/5-", "add9-/5-", "9+(no5)", "add11+", "7/5-", "7/5+", "mM7", "M7/5+", "mM7/5-", "add9+", "madd11+", "M79+", "9-(no5)", "add9+/5-", "dim7", "mM79", "7sus4", "m7/5+", "madd11", "m7"]; var chname5 = ["M7sus4", "M7/5-", "add11", "madd9", "m9", "m9-", "M79", "M7sus5-", "9(no5)", "13(no5)", "7(dom)", "m7/5-", "madd9-/5-", "madd11/5-", "add9-/5-", "9+(no5)", "add11+", "7/5-", "7/5+", "mM7", "M7/5+", "mM7/5-", "add9+", "madd11+", "M79+", "9-(no5)", "add9+/5-", "dim7", "mM79", "7sus4", "m7/5+", "madd11", "m7", "M7"]; var chname6 = ["M7/5-", "add11", "madd9", "m9", "m9-", "M79", "M7sus5-", "9(no5)", "13(no5)", "7(dom)", "m7/5-", "madd9-/5-", "madd11/5-", "add9-/5-", "9+(no5)", "add11+", "7/5-", "7/5+", "mM7", "M7/5+", "mM7/5-", "add9+", "madd11+", "M79+", "9-(no5)", "add9+/5-", "dim7", "mM79", "7sus4", "m7/5+", "madd11", "m7", "M7", "M7sus4"]; var chname7 = ["add11", "madd9", "m9", "m9-", "M79", "M7sus5-", "9(no5)", "13(no5)", "7(dom)", "m7/5-", "madd9-/5-", "madd11/5-", "add9-/5-", "9+(no5)", "add11+", "7/5-", "7/5+", "mM7", "M7/5+", "mM7/5-", "add9+", "madd11+", "M79+", "9-(no5)", "add9+/5-", "dim7", "mM79", "7sus4", "m7/5+", "madd11", "m7", "M7", "M7sus4", "M7/5-"]; var chname8 = ["madd9", "m9", "m9-", "M79", "M7sus5-", "9(no5)", "13(no5)", "7(dom)", "m7/5-", "madd9-/5-", "madd11/5-", "add9-/5-", "9+(no5)", "add11+", "7/5-", "7/5+", "mM7", "M7/5+", "mM7/5-", "add9+", "madd11+", "M79+", "9-(no5)", "add9+/5-", "dim7", "mM79", "7sus4", "m7/5+", "madd11", "m7", "M7", "M7sus4", "M7/5-", "add11"]; var chname9 = ["m9", "m9-", "M79", "M7sus5-", "9(no5)", "13(no5)", "7(dom)", "m7/5-", "madd9-/5-", "madd11/5-", "add9-/5-", "9+(no5)", "add11+", "7/5-", "7/5+", "mM7", "M7/5+", "mM7/5-", "add9+", "madd11+", "M79+", "9-(no5)", "add9+/5-", "dim7", "mM79", "7sus4", "m7/5+", "madd11", "m7", "M7", "M7sus4", "M7/5-", "add11", "madd9"]; var chname10 = ["m9-", "M79", "M7sus5-", "9(no5)", "13(no5)", "7(dom)", "m7/5-", "madd9-/5-", "madd11/5-", "add9-/5-", "9+(no5)", "add11+", "7/5-", "7/5+", "mM7", "M7/5+", "mM7/5-", "add9+", "madd11+", "M79+", "9-(no5)", "add9+/5-", "dim7", "mM79", "7sus4", "m7/5+", "madd11", "m7", "M7", "M7sus4", "M7/5-", "add11", "madd9", "m9"]; var chname11 = ["M79", "M7sus5-", "9(no5)", "13(no5)", "7(dom)", "m7/5-", "madd9-/5-", "madd11/5-", "add9-/5-", "9+(no5)", "add11+", "7/5-", "7/5+", "mM7", "M7/5+", "mM7/5-", "add9+", "madd11+", "M79+", "9-(no5)", "add9+/5-", "dim7", "mM79", "7sus4", "m7/5+", "madd11", "m7", "M7", "M7sus4", "M7/5-", "add11", "madd9", "m9", "m9-"]; var chname12 = ["M7sus5-", "9(no5)", "13(no5)", "7(dom)", "m7/5-", "madd9-/5-", "madd11/5-", "add9-/5-", "9+(no5)", "add11+", "7/5-", "7/5+", "mM7", "M7/5+", "mM7/5-", "add9+", "madd11+", "M79+", "9-(no5)", "add9+/5-", "dim7", "mM79", "7sus4", "m7/5+", "madd11", "m7", "M7", "M7sus4", "M7/5-", "add11", "madd9", "m9", "m9-", "M79"]; var chname13 = ["9(no5)", "13(no5)", "7(dom)", "m7/5-", "madd9-/5-", "madd11/5-", "add9-/5-", "9+(no5)", "add11+", "7/5-", "7/5+", "mM7", "M7/5+", "mM7/5-", "add9+", "madd11+", "M79+", "9-(no5)", "add9+/5-", "dim7", "mM79", "7sus4", "m7/5+", "madd11", "m7", "M7", "M7sus4", "M7/5-", "add11", "madd9", "m9", "m9-", "M79", "M7sus5-"]; var chname14 = ["13(no5)", "7(dom)", "m7/5-", "madd9-/5-", "madd11/5-", "add9-/5-", "9+(no5)", "add11+", "7/5-", "7/5+", "mM7", "M7/5+", "mM7/5-", "add9+", "madd11+", "M79+", "9-(no5)", "add9+/5-", "dim7", "mM79", "7sus4", "m7/5+", "madd11", "m7", "M7", "M7sus4", "M7/5-", "add11", "madd9", "m9", "m9-", "M79", "M7sus5-", "9(no5)"]; var chname15 = ["7(dom)", "m7/5-", "madd9-/5-", "madd11/5-", "add9-/5-", "9+(no5)", "add11+", "7/5-", "7/5+", "mM7", "M7/5+", "mM7/5-", "add9+", "madd11+", "M79+", "9-(no5)", "add9+/5-", "dim7", "mM79", "7sus4", "m7/5+", "madd11", "m7", "M7", "M7sus4", "M7/5-", "add11", "madd9", "m9", "m9-", "M79", "M7sus5-", "9(no5)", "13(no5)"]; var chname16 = ["m7/5-", "madd9-/5-", "madd11/5-", "add9-/5-", "9+(no5)", "add11+", "7/5-", "7/5+", "mM7", "M7/5+", "mM7/5-", "add9+", "madd11+", "M79+", "9-(no5)", "add9+/5-", "dim7", "mM79", "7sus4", "m7/5+", "madd11", "m7", "M7", "M7sus4", "M7/5-", "add11", "madd9", "m9", "m9-", "M79", "M7sus5-", "9(no5)", "13(no5)", "7(dom)"]; var chname17 = ["madd9-/5-", "madd11/5-", "add9-/5-", "9+(no5)", "add11+", "7/5-", "7/5+", "mM7", "M7/5+", "mM7/5-", "add9+", "madd11+", "M79+", "9-(no5)", "add9+/5-", "dim7", "mM79", "7sus4", "m7/5+", "madd11", "m7", "M7", "M7sus4", "M7/5-", "add11", "madd9", "m9", "m9-", "M79", "M7sus5-", "9(no5)", "13(no5)", "7(dom)", "m7/5-"]; var chname18 = ["madd11/5-", "add9-/5-", "9+(no5)", "add11+", "7/5-", "7/5+", "mM7", "M7/5+", "mM7/5-", "add9+", "madd11+", "M79+", "9-(no5)", "add9+/5-", "dim7", "mM79", "7sus4", "m7/5+", "madd11", "m7", "M7", "M7sus4", "M7/5-", "add11", "madd9", "m9", "m9-", "M79", "M7sus5-", "9(no5)", "13(no5)", "7(dom)", "m7/5-", "madd9-/5-"]; var chname19 = ["add9-/5-", "9+(no5)", "add11+", "7/5-", "7/5+", "mM7", "M7/5+", "mM7/5-", "add9+", "madd11+", "M79+", "9-(no5)", "add9+/5-", "dim7", "mM79", "7sus4", "m7/5+", "madd11", "m7", "M7", "M7sus4", "M7/5-", "add11", "madd9", "m9", "m9-", "M79", "M7sus5-", "9(no5)", "13(no5)", "7(dom)", "m7/5-", "madd9-/5-", "madd11/5-"]; var chname20 = ["9+(no5)", "add11+", "7/5-", "7/5+", "mM7", "M7/5+", "mM7/5-", "add9+", "madd11+", "M79+", "9-(no5)", "add9+/5-", "dim7", "mM79", "7sus4", "m7/5+", "madd11", "m7", "M7", "M7sus4", "M7/5-", "add11", "madd9", "m9", "m9-", "M79", "M7sus5-", "9(no5)", "13(no5)", "7(dom)", "m7/5-", "madd9-/5-", "madd11/5-", "add9-/5-"]; var chname21 = ["add11+", "7/5-", "7/5+", "mM7", "M7/5+", "mM7/5-", "add9+", "madd11+", "M79+", "9-(no5)", "add9+/5-", "dim7", "mM79", "7sus4", "m7/5+", "madd11", "m7", "M7", "M7sus4", "M7/5-", "add11", "madd9", "m9", "m9-", "M79", "M7sus5-", "9(no5)", "13(no5)", "7(dom)", "m7/5-", "madd9-/5-", "madd11/5-", "add9-/5-", "9+(no5)"]; var chname22 = ["7/5-", "7/5+", "mM7", "M7/5+", "mM7/5-", "add9+", "madd11+", "M79+", "9-(no5)", "add9+/5-", "dim7", "mM79", "7sus4", "m7/5+", "madd11", "m7", "M7", "M7sus4", "M7/5-", "add11", "madd9", "m9", "m9-", "M79", "M7sus5-", "9(no5)", "13(no5)", "7(dom)", "m7/5-", "madd9-/5-", "madd11/5-", "add9-/5-", "9+(no5)", "add11+"]; var chname23 = ["7/5+", "mM7", "M7/5+", "mM7/5-", "add9+", "madd11+", "M79+", "9-(no5)", "add9+/5-", "dim7", "mM79", "7sus4", "m7/5+", "madd11", "m7", "M7", "M7sus4", "M7/5-", "add11", "madd9", "m9", "m9-", "M79", "M7sus5-", "9(no5)", "13(no5)", "7(dom)", "m7/5-", "madd9-/5-", "madd11/5-", "add9-/5-", "9+(no5)", "add11+", "7/5-"]; var chname24 = ["mM7", "M7/5+", "mM7/5-", "add9+", "madd11+", "M79+", "9-(no5)", "add9+/5-", "dim7", "mM79", "7sus4", "m7/5+", "madd11", "m7", "M7", "M7sus4", "M7/5-", "add11", "madd9", "m9", "m9-", "M79", "M7sus5-", "9(no5)", "13(no5)", "7(dom)", "m7/5-", "madd9-/5-", "madd11/5-", "add9-/5-", "9+(no5)", "add11+", "7/5-", "7/5+"]; var chname25 = ["M7/5+", "mM7/5-", "add9+", "madd11+", "M79+", "9-(no5)", "add9+/5-", "dim7", "mM79", "7sus4", "m7/5+", "madd11", "m7", "M7", "M7sus4", "M7/5-", "add11", "madd9", "m9", "m9-", "M79", "M7sus5-", "9(no5)", "13(no5)", "7(dom)", "m7/5-", "madd9-/5-", "madd11/5-", "add9-/5-", "9+(no5)", "add11+", "7/5-", "7/5+", "mM7"]; var chname26 = ["mM7/5-", "add9+", "madd11+", "M79+", "9-(no5)", "add9+/5-", "dim7", "mM79", "7sus4", "m7/5+", "madd11", "m7", "M7", "M7sus4", "M7/5-", "add11", "madd9", "m9", "m9-", "M79", "M7sus5-", "9(no5)", "13(no5)", "7(dom)", "m7/5-", "madd9-/5-", "madd11/5-", "add9-/5-", "9+(no5)", "add11+", "7/5-", "7/5+", "mM7", "M7/5+"]; var chname27 = ["add9+", "madd11+", "M79+", "9-(no5)", "add9+/5-", "dim7", "mM79", "7sus4", "m7/5+", "madd11", "m7", "M7", "M7sus4", "M7/5-", "add11", "madd9", "m9", "m9-", "M79", "M7sus5-", "9(no5)", "13(no5)", "7(dom)", "m7/5-", "madd9-/5-", "madd11/5-", "add9-/5-", "9+(no5)", "add11+", "7/5-", "7/5+", "mM7", "M7/5+", "mM7/5-"]; var chname28 = ["madd11+", "M79+", "9-(no5)", "add9+/5-", "dim7", "mM79", "7sus4", "m7/5+", "madd11", "m7", "M7", "M7sus4", "M7/5-", "add11", "madd9", "m9", "m9-", "M79", "M7sus5-", "9(no5)", "13(no5)", "7(dom)", "m7/5-", "madd9-/5-", "madd11/5-", "add9-/5-", "9+(no5)", "add11+", "7/5-", "7/5+", "mM7", "M7/5+", "mM7/5-", "add9+"]; var chname29 = ["M79+", "9-(no5)", "add9+/5-", "dim7", "mM79", "7sus4", "m7/5+", "madd11", "m7", "M7", "M7sus4", "M7/5-", "add11", "madd9", "m9", "m9-", "M79", "M7sus5-", "9(no5)", "13(no5)", "7(dom)", "m7/5-", "madd9-/5-", "madd11/5-", "add9-/5-", "9+(no5)", "add11+", "7/5-", "7/5+", "mM7", "M7/5+", "mM7/5-", "add9+", "madd11+"]; var chname30 = ["9-(no5)", "add9+/5-", "dim7", "mM79", "7sus4", "m7/5+", "madd11", "m7", "M7", "M7sus4", "M7/5-", "add11", "madd9", "m9", "m9-", "M79", "M7sus5-", "9(no5)", "13(no5)", "7(dom)", "m7/5-", "madd9-/5-", "madd11/5-", "add9-/5-", "9+(no5)", "add11+", "7/5-", "7/5+", "mM7", "M7/5+", "mM7/5-", "add9+", "madd11+", "M79+"]; var chname31 = ["add9+/5-", "dim7", "mM79", "7sus4", "m7/5+", "madd11", "m7", "M7", "M7sus4", "M7/5-", "add11", "madd9", "m9", "m9-", "M79", "M7sus5-", "9(no5)", "13(no5)", "7(dom)", "m7/5-", "madd9-/5-", "madd11/5-", "add9-/5-", "9+(no5)", "add11+", "7/5-", "7/5+", "mM7", "M7/5+", "mM7/5-", "add9+", "madd11+", "M79+", "9-(no5)"]; var chname32 = ["dim7", "mM79", "7sus4", "m7/5+", "madd11", "m7", "M7", "M7sus4", "M7/5-", "add11", "madd9", "m9", "m9-", "M79", "M7sus5-", "9(no5)", "13(no5)", "7(dom)", "m7/5-", "madd9-/5-", "madd11/5-", "add9-/5-", "9+(no5)", "add11+", "7/5-", "7/5+", "mM7", "M7/5+", "mM7/5-", "add9+", "madd11+", "M79+", "9-(no5)", "add9+/5-"]; var chname33 = ["mM79", "7sus4", "m7/5+", "madd11", "m7", "M7", "M7sus4", "M7/5-", "add11", "madd9", "m9", "m9-", "M79", "M7sus5-", "9(no5)", "13(no5)", "7(dom)", "m7/5-", "madd9-/5-", "madd11/5-", "add9-/5-", "9+(no5)", "add11+", "7/5-", "7/5+", "mM7", "M7/5+", "mM7/5-", "add9+", "madd11+", "M79+", "9-(no5)", "add9+/5-", "dim7"];
+var chnall = ["chname0", 
+"chname1", 
+"chname2", 
+"chname3", 
+"chname4", 
+"chname5", 
+"chname6", 
+"chname7", 
+"chname8", 
+"chname9", 
+"chname10", 
+"chname11", 
+"chname12", 
+"chname13", 
+"chname14", 
+"chname15", 
+"chname16", 
+"chname17", 
+"chname18", 
+"chname19", 
+"chname20", 
+"chname21", 
+"chname22", 
+"chname23", 
+"chname24", 
+"chname25", 
+"chname26", 
+"chname27", 
+"chname28", 
+"chname29", 
+"chname30", 
+"chname31", 
+"chname32", "chname33"];
+
+var chkey = [0,1,2,3,4,5,6,7,8,9,10,11,0,1,2,3,4,5,6,7,8,9,10,11,0,1,2,3,4,5,6,7,8,9,10,11];
+var chordnames = ["a","B","C","D","e","f","g","H","I","J","K","L","m","N","o","p","q","R","s","t","u","V","W","x","y","z","~","!","@","$","%","^","+","|"];
+var allcnames = ["C 7sus4","C# 7sus4","D 7sus4","D# 7sus4","E 7sus4","F 7sus4","F# 7sus4","G 7sus4","G# 7sus4","A 7sus4","A# 7sus4","B 7sus4",
+"C m7/5+","C# m7/5+","D m7/5+","D# m7/5+","E m7/5+","F m7/5+","F# m7/5+","G m7/5+","G# m7/5+","A m7/5+","A# m7/5+","B m7/5+",
+"C madd11","C# madd11","D madd11","D# madd11","E madd11","F madd11","F# madd11","G madd11","G# madd11","A madd11","A# madd11","B madd11",
+"C m7","C# m7","D m7","D# m7","E m7","F m7","F# m7","G m7","G# m7","A m7","A# m7","B m7",
+"C M7","C# M7","D M7","D# M7","E M7","F M7","F# M7","G M7","G# M7","A M7","A# M7","B M7",
+"C M7sus4","C# M7sus4","D M7sus4","D# M7sus4","E M7sus4","F M7sus4","F# M7sus4","G M7sus4","G# M7sus4","A M7sus4","A# M7sus4","B M7sus4",
+"C M7/5-","C# M7/5-","D M7/5-","D# M7/5-","E M7/5-","F M7/5-","F# M7/5-","G M7/5-","G# M7/5-","A M7/5-","A# M7/5-","B M7/5-",
+"C add11","C# add11","D add11","D# add11","E add11","F add11","F# add11","G add11","G# add11","A add11","A# add11","B add11",
+"C madd9","C# madd9","D madd9","D# madd9","E madd9","F madd9","F# madd9","G madd9","G# madd9","A madd9","A# madd9","B madd9",
+"C m9","C# m9","D m9","D# m9","E m9","F m9","F# m9","G m9","G# m9","A m9","A# m9","B m9",
+"C m9-","C# m9-","D m9-","D# m9-","E m9-","F m9-","F# m9-","G m9-","G# m9-","A m9-","A# m9-","B m9-",
+"C M79","C# M79","D M79","D# M79","E M79","F M79","F# M79","G M79","G# M79","A M79","A# M79","B M79",
+"C M7sus5-","C# M7sus5-","D M7sus5-","D# M7sus5-","E M7sus5-","F M7sus5-","F# M7sus5-","G M7sus5-","G# M7sus5-","A M7sus5-","A# M7sus5-","B M7sus5-",
+"C 9(no5)","C# 9(no5)","D 9(no5)","D# 9(no5)","E 9(no5)","F 9(no5)","F# 9(no5)","G 9(no5)","G# 9(no5)","A 9(no5)","A# 9(no5)","B 9(no5)",
+"C 13(no5)","C# 13(no5)","D 13(no5)","D# 13(no5)","E 13(no5)","F 13(no5)","F# 13(no5)","G 13(no5)","G# 13(no5)","A 13(no5)","A# 13(no5)","B 13(no5)",
+"C 7(dom)","C# 7(dom)","D 7(dom)","D# 7(dom)","E 7(dom)","F 7(dom)","F# 7(dom)","G 7(dom)","G# 7(dom)","A 7(dom)","A# 7(dom)","B 7(dom)",
+"C m7/5-","C# m7/5-","D m7/5-","D# m7/5-","E m7/5-","F m7/5-","F# m7/5-","G m7/5-","G# m7/5-","A m7/5-","A# m7/5-","B m7/5-",
+"C madd9-/5-","C# madd9-/5-","D madd9-/5-","D# madd9-/5-","E madd9-/5-","F madd9-/5-","F# madd9-/5-","G madd9-/5-","G# madd9-/5-","A madd9-/5-","A# madd9-/5-","B madd9-/5-",
+"C madd11/5-","C# madd11/5-","D madd11/5-","D# madd11/5-","E madd11/5-","F madd11/5-","F# madd11/5-","G madd11/5-","G# madd11/5-","A madd11/5-","A# madd11/5-","B madd11/5-",
+"C add9-/5-","C# add9-/5-","D add9-/5-","D# add9-/5-","E add9-/5-","F add9-/5-","F# add9-/5-","G add9-/5-","G# add9-/5-","A add9-/5-","A# add9-/5-","B add9-/5-",
+"C 9+(no5)","C# 9+(no5)","D 9+(no5)","D# 9+(no5)","E 9+(no5)","F 9+(no5)","F# 9+(no5)","G 9+(no5)","G# 9+(no5)","A 9+(no5)","A# 9+(no5)","B 9+(no5)",
+"C add11+","C# add11+","D add11+","D# add11+","E add11+","F add11+","F# add11+","G add11+","G# add11+","A add11+","A# add11+","B add11+",
+"C 7/5-","C# 7/5-","D 7/5-","D# 7/5-","E 7/5-","F 7/5-","F# 7/5-","G 7/5-","G# 7/5-","A 7/5-","A# 7/5-","B 7/5-",
+"C 7/5+","C# 7/5+","D 7/5+","D# 7/5+","E 7/5+","F 7/5+","F# 7/5+","G 7/5+","G# 7/5+","A 7/5+","A# 7/5+","B 7/5+",
+"C mM7","C# mM7","D mM7","D# mM7","E mM7","F mM7","F# mM7","G mM7","G# mM7","A mM7","A# mM7","B mM7",
+"C M7/5+","C# M7/5+","D M7/5+","D# M7/5+","E M7/5+","F M7/5+","F# M7/5+","G M7/5+","G# M7/5+","A M7/5+","A# M7/5+","B M7/5+",
+"C mM7/5-","C# mM7/5-","D mM7/5-","D# mM7/5-","E mM7/5-","F mM7/5-","F# mM7/5-","G mM7/5-","G# mM7/5-","A mM7/5-","A# mM7/5-","B mM7/5-",
+"C add9+","C# add9+","D add9+","D# add9+","E add9+","F add9+","F# add9+","G add9+","G# add9+","A add9+","A# add9+","B add9+",
+"C madd11+","C# madd11+","D madd11+","D# madd11+","E madd11+","F madd11+","F# madd11+","G madd11+","G# madd11+","A madd11+","A# madd11+","B madd11+",
+"C M79+","C# M79+","D M79+","D# M79+","E M79+","F M79+","F# M79+","G M79+","G# M79+","A M79+","A# M79+","B M79+",
+"C 9-(no5)","C# 9-(no5)","D 9-(no5)","D# 9-(no5)","E 9-(no5)","F 9-(no5)","F# 9-(no5)","G 9-(no5)","G# 9-(no5)","A 9-(no5)","A# 9-(no5)","B 9-(no5)",
+"C add9+/5-","C# add9+/5-","D add9+/5-","D# add9+/5-","E add9+/5-","F add9+/5-","F# add9+/5-","G add9+/5-","G# add9+/5-","A add9+/5-","A# add9+/5-","B add9+/5-",
+"C dim7","C# dim7","D dim7","D# dim7","E dim7","F dim7","F# dim7","G dim7","G# dim7","A dim7","A# dim7","B dim7",
+"C mM79","C# mM79","D mM79","D# mM79","E mM79","F mM79","F# mM79","G mM79","G# mM79","A mM79","A# mM79","B mM79"];
+var srcArp = ["p0a","p1a","p2a","p3a","p4a","p5a","p6a","p7a","p8a","p9a","p10a","p11a",
+"p0b","p1b","p2b","p3b","p4b","p5b","p6b","p7b","p8b","p9b","p10b","p11b",
+"p0c","p1c","p2c","p3c","p4c","p5c","p6c","p7c","p8c","p9c","p10c","p11c",
+"p0d","p1d","p2d","p3d","p4d","p5d","p6d","p7d","p8d","p9d","p10d","p11d",
+"p0e","p1e","p2e","p3e","p4e","p5e","p6e","p7e","p8e","p9e","p10e","p11e",
+"p0f","p1f","p2f","p3f","p4f","p5f","p6f","p7f","p8f","p9f","p10f","p11f",
+"p0g","p1g","p2g","p3g","p4g","p5g","p6g","p7g","p8g","p9g","p10g","p11g",
+"p0h","p1h","p2h","p3h","p4h","p5h","p6h","p7h","p8h","p9h","p10h","p11h",
+"p0i","p1i","p2i","p3i","p4i","p5i","p6i","p7i","p8i","p9i","p10i","p11i",
+"p0j","p1j","p2j","p3j","p4j","p5j","p6j","p7j","p8j","p9j","p10j","p11j",
+"p0k","p1k","p2k","p3k","p4k","p5k","p6k","p7k","p8k","p9k","p10k","p11k",
+"p0l","p1l","p2l","p3l","p4l","p5l","p6l","p7l","p8l","p9l","p10l","p11l",
+"p0m","p1m","p2m","p3m","p4m","p5m","p6m","p7m","p8m","p9m","p10m","p11m",
+"p0n","p1n","p2n","p3n","p4n","p5n","p6n","p7n","p8n","p9n","p10n","p11n",
+"p0o","p1o","p2o","p3o","p4o","p5o","p6o","p7o","p8o","p9o","p10o","p11o",
+"p0p","p1p","p2p","p3p","p4p","p5p","p6p","p7p","p8p","p9p","p10p","p11p",
+"p0q","p1q","p2q","p3q","p4q","p5q","p6q","p7q","p8q","p9q","p10q","p11q",
+"p0r","p1r","p2r","p3r","p4r","p5r","p6r","p7r","p8r","p9r","p10r","p11r",
+"p0s","p1s","p2s","p3s","p4s","p5s","p6s","p7s","p8s","p9s","p10s","p11s",
+"p0t","p1t","p2t","p3t","p4t","p5t","p6t","p7t","p8t","p9t","p10t","p11t",
+"p0u","p1u","p2u","p3u","p4u","p5u","p6u","p7u","p8u","p9u","p10u","p11u",
+"p0v","p1v","p2v","p3v","p4v","p5v","p6v","p7v","p8v","p9v","p10v","p11v",
+"p0w","p1w","p2w","p3w","p4w","p5w","p6w","p7w","p8w","p9w","p10w","p11w",
+"p0x","p1x","p2x","p3x","p4x","p5x","p6x","p7x","p8x","p9x","p10x","p11x",
+"p0y","p1y","p2y","p3y","p4y","p5y","p6y","p7y","p8y","p9y","p10y","p11y",
+"p0z","p1z","p2z","p3z","p4z","p5z","p6z","p7z","p8z","p9z","p10z","p11z",
+"p0za","p1za","p2za","p3za","p4za","p5za","p6za","p7za","p8za","p9za","p10za","p11za",
+"p0zb","p1zb","p2zb","p3zb","p4zb","p5zb","p6zb","p7zb","p8zb","p9zb","p10zb","p11zb",
+"p0zc","p1zc","p2zc","p3zc","p4zc","p5zc","p6zc","p7zc","p8zc","p9zc","p10zc","p11zc",
+"p0zd","p1zd","p2zd","p3zd","p4zd","p5zd","p6zd","p7zd","p8zd","p9zd","p10zd","p11zd",
+"p0ze","p1ze","p2ze","p3ze","p4ze","p5ze","p6ze","p7ze","p8ze","p9ze","p10ze","p11ze",
+"p0zf","p1zf","p2zf","p3zf","p4zf","p5zf","p6zf","p7zf","p8zf","p9zf","p10zf","p11zf",
+"p0zg","p1zg","p2zg","p3zg","p4zg","p5zg","p6zg","p7zg","p8zg","p9zg","p10zg","p11zg",
+"p0zh","p1zh","p2zh","p3zh","p4zh","p5zh","p6zh","p7zh","p8zh","p9zh","p10zh","p11zh"];
+
+var srcBrp = ["0","1","2","3","4","5","6","7","8","9","10","11",
+"0","1","2","3","4","5","6","7","8","9","10","11",
+"0","1","2","3","4","5","6","7","8","9","10","11",
+"0","1","2","3","4","5","6","7","8","9","10","11",
+"0","1","2","3","4","5","6","7","8","9","10","11",
+"0","1","2","3","4","5","6","7","8","9","10","11",
+"0","1","2","3","4","5","6","7","8","9","10","11",
+"0","1","2","3","4","5","6","7","8","9","10","11",
+"0","1","2","3","4","5","6","7","8","9","10","11",
+"0","1","2","3","4","5","6","7","8","9","10","11",
+"0","1","2","3","4","5","6","7","8","9","10","11",
+"0","1","2","3","4","5","6","7","8","9","10","11",
+"0","1","2","3","4","5","6","7","8","9","10","11",
+"0","1","2","3","4","5","6","7","8","9","10","11",
+"0","1","2","3","4","5","6","7","8","9","10","11",
+"0","1","2","3","4","5","6","7","8","9","10","11",
+"0","1","2","3","4","5","6","7","8","9","10","11",
+"0","1","2","3","4","5","6","7","8","9","10","11",
+"0","1","2","3","4","5","6","7","8","9","10","11",
+"0","1","2","3","4","5","6","7","8","9","10","11",
+"0","1","2","3","4","5","6","7","8","9","10","11",
+"0","1","2","3","4","5","6","7","8","9","10","11",
+"0","1","2","3","4","5","6","7","8","9","10","11",
+"0","1","2","3","4","5","6","7","8","9","10","11",
+"0","1","2","3","4","5","6","7","8","9","10","11",
+"0","1","2","3","4","5","6","7","8","9","10","11",
+"0","1","2","3","4","5","6","7","8","9","10","11",
+"0","1","2","3","4","5","6","7","8","9","10","11",
+"0","1","2","3","4","5","6","7","8","9","10","11",
+"0","1","2","3","4","5","6","7","8","9","10","11",
+"0","1","2","3","4","5","6","7","8","9","10","11",
+"0","1","2","3","4","5","6","7","8","9","10","11",
+"0","1","2","3","4","5","6","7","8","9","10","11",
+"0","1","2","3","4","5","6","7","8","9","10","11"];
+
+var srcDrp = ["a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6",
+"a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6",
+"a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6",
+"a1","a1","a1","a1","a1","a1","a1","a1","a1","a1","a1","a1",
+"a1","a1","a1","a1","a1","a1","a1","a1","a1","a1","a1","a1",
+"a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6",
+"a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6",
+"a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6",
+"a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6",
+"a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6",
+"a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6",
+"a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6",
+"a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6",
+"a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6",
+"a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6",
+"a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6",
+"a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6",
+"a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6",
+"a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6",
+"a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6",
+"a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6",
+"a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6",
+"a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6",
+"a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6",
+"a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6",
+"a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6",
+"a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6",
+"a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6",
+"a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6",
+"a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6",
+"a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6",
+"a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6",
+"a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6","a1a6",
+"a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6","a2a6"];
+
+var srcErp = ["b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6",
+"bl","bl","bl","bl","bl","bl","bl","bl","bl","bl","bl","bl",
+"b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6",
+"bl","bl","bl","bl","bl","bl","bl","bl","bl","bl","bl","bl",
+"bl","bl","bl","bl","bl","bl","bl","bl","bl","bl","bl","bl",
+"b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6",
+"b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6", 
+"b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6",
+"b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6",
+"b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6",
+"b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6",
+"b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6",
+"b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6",
+"b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6",
+"b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6",
+"b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6",
+"b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6",
+"b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6",
+"b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6",
+"b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6",
+"b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6",
+"b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6",
+"b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6",
+"b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6",
+"bl","bl","bl","bl","bl","bl","bl","bl","bl","bl","bl","bl",
+"b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6",
+"b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6", 
+"b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6",
+"b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6",
+"b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6",
+"b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6",
+"b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6",
+"b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6","b2b6",
+"b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6","b1b6"];
+
+var srcFrp = ["10a","11a","12a","1a","2a","3a","4a","5a","6a","7a","8a","9a",
+"5a","6a","7a","8a","9a","10a","11a","12a","1a","2a","3a","4a",
+"1a","2a","3a","4a","5a","6a","7a","8a","9a","10a","11a","12a",
+"4a","5a","6a","7a","8a","9a","10a","11a","12a","1a","2a","3a",
+"4a","5a","6a","7a","8a","9a","10a","11a","12a","1a","2a","3a",
+"6a","7a","8a","9a","10a","11a","12a","1a","2a","3a","4a","5a",
+"4a","5a","6a","7a","8a","9a","10a","11a","12a","1a","2a","3a",
+"1a","2a","3a","4a","5a","6a","7a","8a","9a","10a","11a","12a",
+"12a","1a","2a","3a","4a","5a","6a","7a","8a","9a","10a","11a",
+"2a","3a","4a","5a","6a","7a","8a","9a","10a","11a","12a","1a",
+"2a","3a","4a","5a","6a","7a","8a","9a","10a","11a","12a","1a",
+"3a","4a","5a","6a","7a","8a","9a","10a","11a","12a","1a","2a",
+"6a","7a","8a","9a","10a","11a","12a","1a","2a","3a","4a","5a",
+"3a","4a","5a","6a","7a","8a","9a","10a","11a","12a","1a","2a",
+"9a","10a","11a","12a","1a","2a","3a","4a","5a","6a","7a","8a",
+"2a","3a","4a","5a","6a","7a","8a","9a","10a","11a","12a","1a",
+"4a","5a","6a","7a","8a","9a","10a","11a","12a","1a","2a","3a",
+"12a","1a","2a","3a","4a","5a","6a","7a","8a","9a","10a","11a",
+"12a","1a","2a","3a","4a","5a","6a","7a","8a","9a","10a","11a",
+"12a","1a","2a","3a","4a","5a","6a","7a","8a","9a","10a","11a",
+"10a","11a","12a","1a","2a","3a","4a","5a","6a","7a","8a","9a",
+"4a","5a","6a","7a","8a","9a","10a","11a","12a","1a","2a","3a",
+"4a","5a","6a","7a","8a","9a","10a","11a","12a","1a","2a","3a",
+"9a","10a","11a","12a","1a","2a","3a","4a","5a","6a","7a","8a",
+"4a","5a","6a","7a","8a","9a","10a","11a","12a","1a","2a","3a",
+"9a","10a","11a","12a","1a","2a","3a","4a","5a","6a","7a","8a",
+"4a","5a","6a","7a","8a","9a","10a","11a","12a","1a","2a","3a",
+"1a","2a","3a","4a","5a","6a","7a","8a","9a","10a","11a","12a",
+"1a","2a","3a","4a","5a","6a","7a","8a","9a","10a","11a","12a",
+"11a","12a","1a","2a","3a","4a","5a","6a","7a","8a","9a","10a",
+"10a","11a","12a","1a","2a","3a","4a","5a","6a","7a","8a","9a",
+"12a","1a","2a","3a","4a","5a","6a","7a","8a","9a","10a","11a",
+"3a","4a","5a","6a","7a","8a","9a","10a","11a","12a","1a","2a",
+"8a","9a","10a","11a","12a","1a","2a","3a","4a","5a","6a","7a"];
+
+var srcGrp = ["2b","3b","4b","5b","6b","7b","8b","9b","10b","11b","12b","1b",
+"9b","10b","11b","12b","1b","2b","3b","4b","5b","6b","7b","8b",
+"6b","7b","8b","9b","10b","11b","12b","1b","2b","3b","4b","5b",
+"9b","10b","11b","12b","1b","2b","3b","4b","5b","6b","7b","8b",
+"9b","10b","11b","12b","1b","2b","3b","4b","5b","6b","7b","8b",
+"11b","12b","1b","2b","3b","4b","5b","6b","7b","8b","9b","10b",
+"8b","9b","10b","11b","12b","1b","2b","3b","4b","5b","6b","7b",
+"6b","7b","8b","9b","10b","11b","12b","1b","2b","3b","4b","5b",
+"5b","6b","7b","8b","9b","10b","11b","12b","1b","2b","3b","4b",
+"9b","10b","11b","12b","1b","2b","3b","4b","5b","6b","7b","8b",
+"9b","10b","11b","12b","1b","2b","3b","4b","5b","6b","7b","8b",
+"10b","11b","12b","1b","2b","3b","4b","5b","6b","7b","8b","9b",
+"11b","12b","1b","2b","3b","4b","5b","6b","7b","8b","9b","11b",
+"10b","11b","12b","1b","2b","3b","4b","5b","6b","7b","8b","9b",
+"3b","4b","5b","6b","7b","8b","9b","10b","11b","12b","1b","2b",
+"6b","7b","8b","9b","10b","11b","12b","1b","2b","3b","4b","5b",
+"8b","9b","10b","11b","12b","1b","2b","3b","4b","5b","6b","7b",
+"5b","6b","7b","8b","9b","10b","11b","12b","1b","2b","3b","4b",
+"5b","6b","7b","8b","9b","10b","11b","12b","1b","2b","3b","4b",
+"5b","6b","7b","8b","9b","10b","11b","12b","1b","2b","3b","4b",
+"3b","4b","5b","6b","7b","8b","9b","10b","11b","12b","1b","2b",
+"9b","10b","11b","12b","1b","2b","3b","4b","5b","6b","7b","8b",
+"8b","9b","10b","11b","12b","1b","2b","3b","4b","5b","6b","7b",
+"2b","3b","4b","5b","6b","7b","8b","9b","10b","11b","12b","1b",
+"9b","10b","11b","12b","1b","2b","3b","4b","5b","6b","7b","8b",
+"2b","3b","4b","5b","6b","7b","8b","9b","10b","11b","12b","1b",
+"8b","9b","10b","11b","12b","1b","2b","3b","4b","5b","6b","7b",
+"6b","7b","8b","9b","10b","11b","12b","1b","2b","3b","4b","5b",
+"6b","7b","8b","9b","10b","11b","12b","1b","2b","3b","4b","5b",
+"3b","4b","5b","6b","7b","8b","9b","10b","11b","12b","1b","2b",
+"3b","4b","5b","6b","7b","8b","9b","10b","11b","12b","1b","2b",
+"5b","6b","7b","8b","9b","10b","11b","12b","1b","2b","3b","4b",
+"8b","9b","10b","11b","12b","1b","2b","3b","4b","5b","6b","7b",
+"3b","4b","5b","6b","7b","8b","9b","10b","11b","12b","1b","2b",];
+
+var srcCrp = [
+"ga","ga","ga","ga","ga","ga","ga","ga","ga","ga","ga","ga",
+"gb","gb","gb","gb","gb","gb","gb","gb","gb","gb","gb","gb",
+"gc","gc","gc","gc","gc","gc","gc","gc","gc","gc","gc","gc",
+"gd","gd","gd","gd","gd","gd","gd","gd","gd","gd","gd","gd",
+"ge","ge","ge","ge","ge","ge","ge","ge","ge","ge","ge","ge",
+"gf","gf","gf","gf","gf","gf","gf","gf","gf","gf","gf","gf",
+"gg","gg","gg","gg","gg","gg","gg","gg","gg","gg","gg","gg",
+"gh","gh","gh","gh","gh","gh","gh","gh","gh","gh","gh","gh",
+"gi","gi","gi","gi","gi","gi","gi","gi","gi","gi","gi","gi",
+"gj","gj","gj","gj","gj","gj","gj","gj","gj","gj","gj","gj",
+"gk","gk","gk","gk","gk","gk","gk","gk","gk","gk","gk","gk",
+"gl","gl","gl","gl","gl","gl","gl","gl","gl","gl","gl","gl",
+"gm","gm","gm","gm","gm","gm","gm","gm","gm","gm","gm","gm",
+"gn","gn","gn","gn","gn","gn","gn","gn","gn","gn","gn","gn",
+"go","go","go","go","go","go","go","go","go","go","go","go",
+"gp","gp","gp","gp","gp","gp","gp","gp","gp","gp","gp","gp",
+"gq","gq","gq","gq","gq","gq","gq","gq","gq","gq","gq","gq",
+"gr","gr","gr","gr","gr","gr","gr","gr","gr","gr","gr","gr",
+"gs","gs","gs","gs","gs","gs","gs","gs","gs","gs","gs","gs",
+"gt","gt","gt","gt","gt","gt","gt","gt","gt","gt","gt","gt",
+"gu","gu","gu","gu","gu","gu","gu","gu","gu","gu","gu","gu",
+"gv","gv","gv","gv","gv","gv","gv","gv","gv","gv","gv","gv",
+"gw","gw","gw","gw","gw","gw","gw","gw","gw","gw","gw","gw",
+"gx","gx","gx","gx","gx","gx","gx","gx","gx","gx","gx","gx",
+"gy","gy","gy","gy","gy","gy","gy","gy","gy","gy","gy","gy",
+"gz","gz","gz","gz","gz","gz","gz","gz","gz","gz","gz","gz",
+"gza","gza","gza","gza","gza","gza","gza","gza","gza","gza","gza","gza",
+"gzb","gzb","gzb","gzb","gzb","gzb","gzb","gzb","gzb","gzb","gzb","gzb",
+"gzc","gzc","gzc","gzc","gzc","gzc","gzc","gzc","gzc","gzc","gzc","gzc",
+"gzd","gzd","gzd","gzd","gzd","gzd","gzd","gzd","gzd","gzd","gzd","gzd",
+"gze","gze","gze","gze","gze","gze","gze","gze","gze","gze","gze","gze",
+"gzf","gzf","gzf","gzf","gzf","gzf","gzf","gzf","gzf","gzf","gzf","gzf",
+"gzg","gzg","gzg","gzg","gzg","gzg","gzg","gzg","gzg","gzg","gzg","gzg",
+"gzh","gzh","gzh","gzh","gzh","gzh","gzh","gzh","gzh","gzh","gzh","gzh","gzh","gzh"];
+//1.3*!*
+function textReplace(haystack, needle, replacement) {
+  needle = needle.replace(/([-()\[\]{}+?*.$\^|,:#<!\\])/g,"\\$1")//0.2-0.5*!*
+                 .replace(/\x08/g,"\\x08");
+  return haystack.replace(new RegExp(needle, 'g'), replacement);//0.4-0.9*!*
+}
+var o;
+var d;
+var e;
+var h;
+var g;
+var f;
+var col;
+var exportplus;
+var hod0;
+var offsetev;
+
+
+function myFunction3(){
+    var x = document.getElementById("demo2").textContent.substring(0,30); 
+    document.getElementById("demo2").innerHTML = x;}
+
+    
+    var a = document.getElementById("demo2");
+ 
+function divfunct(divstr){
+var exxp = "";
+var port = [];
+var oute = "";
+var divs = "<te>".concat(divstr,"</te>").split(','); //0.3*!*
+for (var i = 0; i < divs.length; i++)
+{exxp = divs[i].replace('<te>', '<te id="' + divs[i].match(/>(.*?)<\//)[1].substring(divs[i].match(/>(.*?)<\//)[1].indexOf(">")+ 1).replace(" ", "") + '">').replace('<te id="">', '<te>').replace('<te id="C">', '<te>').replace('<te id="C#">', '<te>').replace('<te id="D">', '<te>').replace('<te id="D#">', '<te>').replace('<te id="E">', '<te>').replace('<te id="F">', '<te>').replace('<te id="F#">', '<te>').replace('<te id="G">', '<te>').replace('<te id="G#">', '<te>').replace('<te id="A">', '<te>').replace('<te id="A#">', '<te>').replace('<te id="B">', '<te>');// 0.2-2.2*!*
+port.push(exxp); 
+} oute = port.join(',');
+return oute};
+
+function sampleFunction(c, b, a, t) { //1.1 07textreplace 04divfunct *!*
+    var arr = [];
+    if (a == 33) {
+   h = limall_all[c].substring((3 + limall_all[c].indexOf(c + "-" + a)));
+    } else {
+   h = limall_all[c].substring((3 + limall_all[c].indexOf(c + "-" + a))).substring
+       (0,
+        limall_all[c].substring((3 + limall_all[c].indexOf(c + "-" + a))).indexOf("-"));
+    }
+   g = h.substring(h.indexOf(" " + b + " ")).substring(
+         h.substring(h.indexOf(" " + b + " ")).indexOf("(") + 1,
+         h.substring(h.indexOf(" " + b + " ")).indexOf(")"));
+   glength = g.length;
+   f = g.split(" ");
+   flength = f.length;
+   d0 = textReplace(g,chordnames[0],chall[0]);//0.1*!*
+   d1 = textReplace(d0,chordnames[1],chall[1]);
+   d2 = textReplace(d1,chordnames[2],chall[2]);
+   d3 = textReplace(d2,chordnames[3],chall[3]);
+   d4 = textReplace(d3,chordnames[4],chall[4]);
+   d5 = textReplace(d4,chordnames[5],chall[5]);
+   d6 = textReplace(d5,chordnames[6],chall[6]);
+   d7 = textReplace(d6,chordnames[7],chall[7]); 
+   d8 = textReplace(d7,chordnames[8],chall[8]);
+   d9 = textReplace(d8,chordnames[9],chall[9]);
+   d10 = textReplace(d9,chordnames[10],chall[10]);
+   d11 = textReplace(d10,chordnames[11],chall[11]);
+   d12 = textReplace(d11,chordnames[12],chall[12]);
+   d13 = textReplace(d12,chordnames[13],chall[13]);
+   d14 = textReplace(d13,chordnames[14],chall[14]);
+   d15 = textReplace(d14,chordnames[15],chall[15]);
+   d16 = textReplace(d15,chordnames[16],chall[16]);
+   d17 = textReplace(d16,chordnames[17],chall[17]);
+   d18 = textReplace(d17,chordnames[18],chall[18]);
+   d19 = textReplace(d18,chordnames[19],chall[19]);
+   d20 = textReplace(d19,chordnames[20],chall[20]);
+   d21 = textReplace(d20,chordnames[21],chall[21]);
+   d22 = textReplace(d21,chordnames[22],chall[22]);
+   d23 = textReplace(d22,chordnames[23],chall[23]); //0.1*!*
+   d24 = textReplace(d23,chordnames[24],chall[24]);
+   d25 = textReplace(d24,chordnames[25],chall[25]);
+   d26 = textReplace(d25,chordnames[26],chall[26]);
+   d27 = textReplace(d26,chordnames[27],chall[27]);
+   d28 = textReplace(d27,chordnames[28],chall[28]);
+   d29 = textReplace(d28,chordnames[29],chall[29]);
+   d30 = textReplace(d29,chordnames[30],chall[30]);
+   d31 = textReplace(d30,chordnames[31],chall[31]);
+   d32 = textReplace(d31,chordnames[32],chall[32]);
+   d33 = textReplace(d32,chordnames[33],chall[33]);
+   if (t === undefined){
+   dn0 = textReplace(textReplace(d33,":","10"),"=", "11")
+   }
+   if (t == 0){
+  dn0 = textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(d33,"=","B*"),":","A#*"),"9","A*"),"8","G#*"),"7","G*"),"6","F#*"),"5","F*"),"4","E*"),"3","D#*"),"2","D*"),"1","C#*"),"0","C*")   
+   }
+   if (t == 1){
+   dn0 = textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(d33,"=","C*"),":","B*"),"9","A#*"),"8","A*"),"7","G#*"),"6","G*"),"5","F#*"),"4","F*"),"3","E*"),"2","D#*"),"1","D*"),"0","C#*")   
+   }
+   if (t == 2){
+   dn0 = textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(d33,"=","C#*"),":","C*"),"9","B*"),"8","A#*"),"7","A*"),"6","G#*"),"5","G*"),"4","F#*"),"3","F*"),"2","E*"),"1","D#*"),"0","D*")   
+   }
+   if (t == 3){
+   dn0 = textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(d33,"=","D*"),":","C#*"),"9","C*"),"8","B*"),"7","A#*"),"6","A*"),"5","G#*"),"4","G*"),"3","F#*"),"2","F*"),"1","E*"),"0","D#*")   
+   }
+   if (t == 4){
+   dn0 = textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(d33,"=","D#*"),":","D*"),"9","C#*"),"8","C*"),"7","B*"),"6","A#*"),"5","A*"),"4","G#*"),"3","G*"),"2","F#*"),"1","F*"),"0","E*")
+   }
+   if (t == 5){
+   dn0 = textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(d33,"=","E*"),":","D#*"),"9","D*"),"8","C#*"),"7","C*"),"6","B*"),"5","A#*"),"4","A*"),"3","G#*"),"2","G*"),"1","F#*"),"0","F*")   
+   }
+   if (t == 6){
+   dn0 = textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(d33,"=","F*"),":","E*"),"9","D#*"),"8","D*"),"7","C#*"),"6","C*"),"5","B*"),"4","A#*"),"3","A*"),"2","G#*"),"1","G*"),"0","F#*")   
+   }
+   if (t == 7){
+   dn0 = textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(d33,"=","F#*"),":","F*"),"9","E*"),"8","D#*"),"7","D*"),"6","C#*"),"5","C*"),"4","B*"),"3","A#*"),"2","A*"),"1","G#*"),"0","G*")   
+   }
+   if (t == 8){
+   dn0 = textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(d33,"=","G*"),":","F#*"),"9","F*"),"8","E*"),"7","D#*"),"6","D*"),"5","C#*"),"4","C*"),"3","B*"),"2","A#*"),"1","A*"),"0","G#*")   
+   }
+   if (t == 9){
+   dn0 = textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(d33,"=","G#*"),":","G*"),"9","F#*"),"8","F*"),"7","E*"),"6","D#*"),"5","D*"),"4","C#*"),"3","C*"),"2","B*"),"1","A#*"),"0","A*")   
+   }
+   if (t == 10){
+   dn0 = textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(d33,"=","A*"),":","G#*"),"9","G*"),"8","F#*"),"7","F*"),"6","E*"),"5","D#*"),"4","D*"),"3","C#*"),"2","C*"),"1","B*"),"0","A#*")   
+   }
+   if (t == 11){
+   dn0 = textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(textReplace(d33,"=","A#*"),":","A*"),"9","G#*"),"8","G*"),"7","F#*"),"6","F*"),"5","E*"),"4","D#*"),"3","D*"),"2","C#*"),"1","C*"),"0","B*")   
+   }
+
+   d34 = textReplace(dn0,"MMM","mM");
+   d35 = textReplace(d34,"MM","m");
+   d36 = textReplace(d35,"Min","-");
+   d37 = textReplace(d36,"PlU","+");
+   d38 = textReplace(d37,"O","o");
+   d39 = textReplace(d38,"Add","add");
+   d40 = textReplace(d39,"SUS","sus");
+   d41 = textReplace(d40,"SE","7");
+   d42 = textReplace(d41,"FU","4");
+   d43 = textReplace(d42,"FE","5");
+   d44 = textReplace(d43,"EE","11");
+   d45 = textReplace(d44,"nn","9");
+   d = textReplace(d45,"TT","13");
+   dlength = d.length;
+   e = d.split(" "); //0.1*!*
+   let gugu = (c == a && b == 0 || 
+                c == 1 && b == 5 && a == 2 || 
+                c == 1 && b == 5 && a == 3 ||
+                c == 2 && b == 7 && a == 1 || 
+                c == 3 && b == 7 && a == 1 ||
+                c == 7 && b == 4 && a == 17 ||
+                c == 17 && b == 8 && a == 7 ||
+                c == 8 && b == 8 && a == 21 ||
+                c == 21 && b == 4 && a == 8 ||
+                c == 9 && b == 2 && a == 10 ||
+                c == 10 && b == 10 && a == 9 ||
+                c == 9 && b == 3 && a == 11 ||
+                c == 11 && b == 9 && a == 9 ||
+                c == 9 && b == 10 && a == 13 ||
+                c == 13 && b == 2 && a == 9 ||
+                c == 10 && b == 1 && a == 11 ||
+                c == 11 && b == 11 && a == 10 ||
+                c == 10 && b == 8 && a == 13 ||
+                c == 13 && b == 6 && a == 10 ||
+                c == 11 && b == 7 && a == 13 ||
+                c == 13 && b == 5 && a == 11 ||
+                c == 22 && b == 6 && a == 22 ||
+                c == 32 && b == 3 && a == 32 ||
+                c == 32 && b == 6 && a == 32 ||
+                c == 32 && b == 9 && a == 32);
+   let mofo = (t === undefined || 
+               t == 0 ||
+               t == 1 ||
+               t == 2 ||
+               t == 3 ||
+               t == 4 ||
+               t == 5 ||
+               t == 6 ||
+               t == 7 ||
+               t == 8 ||
+               t == 9 ||
+               t == 10 ||
+               t == 11);
+         if (mofo && flength > 1){
+            for (u = 0; u < flength; u++){
+               hod0 = textReplace(e[u].substring(0,e[u].length - 1),"*"," ").fontcolor(ecolor[u + 1])//0.1*!*
+         arr.push(hod0);
+         }   
+               col = flength + 1;
+               exportplus = textReplace(arr.join(),",","</te>,<te>");//0.1*!*
+
+         return divfunct(exportplus); // + "END"
+         }/////////////////////////
+         if (t === "black"){exportplus = g;
+     return divfunct(exportplus)}//////////////////////
+         if (t === false && flength > 1){
+        for (u = 0; u < flength; u++){
+         arr.push(f[u].fontcolor(ecolor[u + 1]))
+         }
+               col = flength + 1;
+               exportplus = arr;
+         return divfunct(exportplus);///////////////////////
+         }
+         if (t === true || t === false || mofo){
+            if (flength > 1 && t === true){
+               col = flength + 1;
+               exportplus = g.fontcolor(ecolor[flength + 1]);
+     return divfunct(exportplus)}////////////////////////
+            if (g == "_" || g.length > 1){
+               col = 2;
+                if (mofo){ exportplus = textReplace(textReplace(d.substring(0,dlength - 1),"*"," "),",","</te>,<te>").fontcolor(ecolor[1]);
+                    return divfunct(exportplus);////////////////////
+                } else { exportplus = g.fontcolor(ecolor[1]);
+                    return divfunct(exportplus);/////////////////////
+                }
+            }
+            if (gugu){
+               col = 0;
+                if (mofo){ exportplus = textReplace(textReplace(d.substring(0,dlength - 1),"*"," "),",","</te>,<te>").fontcolor(ecolor[0])
+                    return divfunct(exportplus);////////////////
+                } else { exportplus = g.fontcolor(ecolor[0]);
+                    return divfunct(exportplus);////////////////
+                }
+                
+            }
+            else{
+               col = 1;
+                if (mofo){ exportplus = textReplace(textReplace(d.substring(0,dlength - 1),"*"," "),",","</te>,<te>").fontcolor(ecolor[1]);
+                    return divfunct(exportplus);////////////////////
+                } else { exportplus = g.fontcolor(ecolor[1]);
+                    return divfunct(exportplus);}////////////////////////
+            }}
+        else 
+        {
+            if (flength > 1){
+               col = flength + 1;
+               exportplus = t.fontcolor(ecolor[flength + 1]);
+     return divfunct(exportplus);}///////////////////
+            if (g == "_" || glength > 1){
+               col = 2;
+               exportplus = t.fontcolor(ecolor[1]);
+     return divfunct(exportplus)}//////////////////
+            if (gugu){
+               col = 0;
+               exportplus = t.fontcolor(ecolor[0]);
+     return divfunct(exportplus);}/////////////////////
+            else{
+               col = 1;
+               exportplus = t.fontcolor(ecolor[1]);
+     return divfunct(exportplus);}//////////////////////
+            }
+}
+
+var txt;
+var exp; 
+var template2 = "console.log(i0 + ' ' + h0)";
+
+
+var el1 = document.getElementsByClassName('slider')[0];  
+el1.onclick = (function() { 
+if (!el1.previousElementSibling.checked)  
+{piano = true} else 
+{piano = false; $('img[class="pia"]').hide()} 
+var selection = window.getSelection();
+   if ($(window.getSelection().anchorNode).attr('id') === 'demo2') {selection.removeAllRanges()};
+ })
+
+var el2 = document.getElementsByClassName('slider')[1];  
+el2.onclick = (function() {
+if (!el2.previousElementSibling.checked) 
+{guitar = true} else 
+{piano = false; $('img[class="gui"]').hide()}
+var selection = window.getSelection();
+   if ($(window.getSelection().anchorNode).attr('id') === 'demo2') {selection.removeAllRanges()};
+ })
+
+function myFunction2() {
+  //myList = ""
+  //location.reload(true);
+  arr2 = [];
+  arr3 = [];
+  arr2a = [];
+  arr3a = [];
+  myList ='<ul>';
+  var chords = hodor[0] + " " + hodor[1] + "," + hodor[3] + " " + hodor[4];
+  //prompt("Please enter your chords separated by commas without spaces after like here:\nA 7(dom),C m7,D madd11,B m9,D# add11,F# 7/5+");
+  txt = chords;
+  for (q = 0; q < txt.split(",").length - 1; q++){ //0.1*!*
+    arr2a.push("\"" + txt.split(",")[q].substring(0,txt.split(",")[q].indexOf(" ")) + "\",\"" + txt.split(",")[q + 1].substring(0,txt.split(",")[q + 1].indexOf(" ")) + "\""); //0.1*!*
+    arr3a.push("\"" + txt.split(",")[q].substring(txt.split(",")[q].indexOf(" ") + 1) + "\",\"" + txt.split(",")[q + 1].substring(txt.split(",")[q + 1].indexOf(" ") + 1) + "\"")};
+  for (n = 0; n < arr2a.length; n++){
+    arr2.push(arr2a[n].split(","));
+    arr3.push(arr3a[n].split(","));//0.1*!*
+  }
+
+  for (r = 0; r < arr2.length; r++){
+    i0 = textReplace(arr2[r][0],"\"","");
+    n0 = notes.indexOf(i0);
+    i1 = textReplace(arr2[r][1],"\"","");
+    n1 = notes.indexOf(i1); 
+    h0 = textReplace(arr3[r][0],"\"","");
+    c0 = chname.indexOf(h0);
+    h1 = textReplace(arr3[r][1],"\"","");
+    c1 = chname.indexOf(h1);
+    sp = " ";
+    if (n0 <= n1){ 
+    myList += '<li>' + '<te id="' + i0.concat(h0) + '">' + i0.fontcolor("FFFFFF") + " " + h0.fontcolor("FFFFFF") + '</te>' + "," + //'<te>' + // 
+        sampleFunction(c0,(n1 - n0),c1,n0)// 0.1*!*
+   // + '</te>' 
+    + "," + '<te id="' + i1.concat(h1) + '">' + i1.fontcolor("FFFFFF") + " " + h1.fontcolor("FFFFFF") + '</te>' + '</li>';
+  //document.getElementById("demo2").children[0].children[q].appendChild(document.createElement("HR")); 
+    } else {
+    myList += '<li>' + '<te id="' + i0.concat(h0) + '">' + i0.fontcolor("FFFFFF")  + " " + h0.fontcolor("FFFFFF") + '</te>' + "," + //'<te>' + // 
+        sampleFunction(c0,((12 + n1) - n0),c1,n0)//0.2*!*
+   // + '</te>' 
+    + "," + '<te id="' + i1.concat(h1) + '">' + i1.fontcolor("FFFFFF") + " " + h1.fontcolor("FFFFFF") + '</te>' + '</li>'; 
+ //document.getElementById("demo2").children[0].children[q].appendChild(document.createElement("HR")); 
+   }
+  }
+    myList += '</ul>';
+      if (chords == null || chords == "") {
+document.getElementById("demo2").innerHTML = "";
+      }else{
+          exp = myList;
+document.getElementById("demo2").innerHTML = myList; //0.4-4.5 *!*
+}
+document.getElementById("demo2").style.textIndent = "30px"; //for assembly  //0.1 *!*
+document.getElementById("demo2").style.border = "15px solid black";   //0.1-0.2 *!*
+
+
+//3.8
+
+var darr = $('#demo2')[0].innerText.replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").split(","); //1.1
+if (darr[1].length <= 2 && darr.length == 3){
+if (darr[0] == darr[2]) {darr = [darr[0],darr[0]]} else {darr = [darr[0], darr[2]]}};//0.1
+for (var i = 0; i < darr.length; i++){
+  ell  = document.getElementById(darr[i].replace(/\s/g, '')); //0.1
+  //$el =  
+//instance = new Hammer(ell,{domEvents: true}); //0.1
+/*
+ell.on('doubletap', function(ev) { //0.2
+    var range = document.createRange();
+    var selection = window.getSelection();
+    range.selectNodeContents(document.getElementById('demo2')); 
+    selection.addRange(range);
+    $('img[alt*="img"]').hide();//$('img').hide();
+    ev.preventDefault(); 
+    event.preventDefault();
+    return false;
+  });
+*/
+ell.onclick = function(ev){
+   var selection = window.getSelection();
+   if($(window.getSelection().anchorNode).attr('id') == "demo2")
+{selection.removeAllRanges();
+ev.preventDefault(); 
+event.preventDefault();
+} else {
+  
+    var div;
+    if (ev.target.parentNode.getAttribute('id') == null){
+      div = ev.target} else {div = ev.target.parentNode}
+    var rect = div.getBoundingClientRect(); 
+     offsetev = rect;  //reid = "#" + div.;
+        var bb = $('img');
+        var aa = bb.parents().filter('[name="pian"]').children();
+        var ab = bb.parents().filter('[name="pian1"]').children();
+        var cc = bb.parents().filter('[name="chit"]').children(); 
+        var ca = bb.parents().filter('[name="chit1"]').children(); 
+        var cb = bb.parents().filter('[name="chit2"]').children(); 
+        var cd = bb.parents().filter('[name="chit3"]').children(); 
+        var ce = bb.parents().filter('[name="chit4"]').children(); 
+     //  ell.attr('style','background-color:lightgray');
+     div.style.backgroundColor = "#474747";
+  
+        if (div.innerText.length > 2) {
+            var step0 = allcnames.indexOf(div.innerText); 
+            aa.attr({ 
+                src: "http://chordaedron.com/gallery/" + srcArp[step0] + ".png",
+                width: '220',
+                height: '70', 
+            });
+            ab.attr({ 
+                src: "http://chordaedron.com/gallery/" + srcBrp[step0] + ".png",
+                width: '220',
+                height: '70', 
+            });
+            cc.attr({ 
+                src: "http://chordaedron.com/gallery/" + srcCrp[step0] + ".png",
+                width: '220',
+                height: '70', 
+            });
+            ca.attr({ 
+                src: "http://chordaedron.com/gallery/" + srcDrp[step0] + "1.png",
+                width: '220',
+                height: '70', 
+            });
+            cb.attr({ 
+                src: "http://chordaedron.com/gallery/" + srcErp[step0] + "1.png",
+                width: '220',
+                height: '70', 
+            });
+            cd.attr({ 
+                src: "http://chordaedron.com/gallery/" + srcFrp[step0] + "1.png",
+                width: '220',
+                height: '70', 
+            });
+            ce.attr({ 
+                src: "http://chordaedron.com/gallery/" + srcGrp[step0] + "1.png",
+                width: '220',
+                height: '70', 
+            });
+         //   $this.attr('style','background-color:lavender');             
+            if ($('.slider:not([class*="round"])')[0].previousElementSibling.checked) {
+                ////////////< modal Init piano
+                aa.show(); 
+                ab.show();
+                //////>
+                
+                //******************** PIANO OFFSET
+                aa.offset({ top: rect.top + 20, left: rect.left - 35}).show();
+                ab.offset({ top: rect.top + 20, left: rect.left - 35}).show();
+                //console.log(ev);
+                //********************
+               
+            };
+            if ($('.round')[0].previousElementSibling.checked) {
+                //////////< modal Init guitar
+                cc.show();
+                ca.show();
+                cb.show();
+                cd.show();
+                ce.show();
+                //////////>
+                
+                
+                //******************* GUITAR OFFSET
+                cc.offset({ top: rect.top - 65, left: rect.left - 55}).show();
+                ca.offset({ top: rect.top - 65, left: rect.left - 55}).show();
+                cb.offset({ top: rect.top - 65, left: rect.left - 55}).show();
+                cd.offset({ top: rect.top - 65, left: rect.left - 55}).show();
+                ce.offset({ top: rect.top - 65, left: rect.left - 55}).show();
+                //*******************
+            };  // console.log(ev.srcEvent.defaultPrevented);  
+           //ev.stopPropagation();
+           ev.preventDefault(); event.preventDefault();
+          // console.log(ev.srcEvent.defaultPrevented);  
+          // 
+        } 
+        else { 
+             aa.hide();
+             ab.hide();
+             cc.hide();
+                ca.hide();
+                cb.hide();
+                cd.hide();
+                ce.hide();
+            // cc.hide(); 
+            //event.stopPropagation();
+            ev.preventDefault(); event.preventDefault();
+        };
+
+  /////////////////////////
+} 
+ }  
+}
+}
+
+</script>
+
+
+
+</body>
+
+</html>
