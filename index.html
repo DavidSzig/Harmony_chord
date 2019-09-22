@@ -12,7 +12,7 @@
    
 @charset "UTF-8";
 body {
-  font-family: Arial, "Hiragino Sans GB", 冬青黑, "Microsoft YaHei", 微软雅黑, SimSun, 宋体, Helvetica, Tahoma, "Arial sans-serif";
+  font-family: Arial, "Hiragino Sans GB", Helvetica, Tahoma, "Arial sans-serif";
   background: #000;
 }
 
@@ -217,10 +217,10 @@ class IosSelector {
   constructor(options) {
     let defaults = {
       el: '', // dom 
-      type: 'infinite', // infinite 无限滚动，normal 非无限 
-      count: 20, // 圆环规格，圆环上选项个数，必须设置 4 的倍数
-      sensitivity: 0.8, // 灵敏度
-      source: [], // 选项 {value: xx, text: xx}
+      type: 'infinite',
+      count: 20, // 
+      sensitivity: 0.8, 
+      source: [], 
       value: null,
       onChange: null
     };
@@ -231,12 +231,12 @@ class IosSelector {
 
     this.halfCount = this.options.count / 2;
     this.quarterCount = this.options.count / 4;
-    this.a = this.options.sensitivity * 10; // 滚动减速度 0.1*!*
-    this.minV = Math.sqrt(1 / this.a); // 最小初速度
+    this.a = this.options.sensitivity * 10; //0.1*!*
+    this.minV = Math.sqrt(1 / this.a); // 
     this.selected = this.source[0];
 
-    this.exceedA = 10; // 超出减速 
-    this.moveT = 0; // 滚动 tick
+    this.exceedA = 10; // 
+    this.moveT = 0; // tick
     this.moving = false;
 
     this.elems = {
@@ -254,11 +254,11 @@ class IosSelector {
       touchend: null
     };
 
-    this.itemHeight = 25;//this.elems.el.offsetHeight * 3 / this.options.count; // 每项高度
-    this.itemAngle = 360 / this.options.count; // 每项之间旋转度数
-    this.radius = this.itemHeight / Math.tan(this.itemAngle * Math.PI / 180); // 圆环半径 
+    this.itemHeight = 25;//this.elems.el.offsetHeight * 3 / this.options.count; // 
+    this.itemAngle = 360 / this.options.count; // 
+    this.radius = this.itemHeight / Math.tan(this.itemAngle * Math.PI / 180); // 
 
-    this.scroll = 0; // 单位为一个 item 的高度（度数）
+    this.scroll = 0; //
     this._init(); //0.1*!*
   }
 
@@ -369,7 +369,7 @@ if (!same){  document.removeEventListener('mousemove', hold1.events.touchmove); 
       let startY = touchData.yArr[touchData.yArr.length - 2][0];
       let endY = touchData.yArr[touchData.yArr.length - 1][0];
 
-      // 计算速度
+      // 
       v = ((startY - endY) / this.itemHeight) * 1000 / (endTime - startTime);
       let sign = v > 0 ? 1 : -1;
 
@@ -403,7 +403,7 @@ if (!same){  document.removeEventListener('mousemove', hold1.events.touchmove); 
       </div>
     `;
 
-    // source 处理
+    // source 
     if (this.options.type === 'infinite') {
       let concatSource = [].concat(source); //0.1*!*
      previoussrc = source;
@@ -415,7 +415,7 @@ if (!same){  document.removeEventListener('mousemove', hold1.events.touchmove); 
     this.source = source; 
     let sourceLength = source.length;
 
-    // 圆环 HTML
+    //  HTML
     let circleListHTML = '';
     for (let i = 0; i < source.length; i++) {
       circleListHTML += `<li class="select-option"
